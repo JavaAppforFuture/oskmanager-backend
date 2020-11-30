@@ -27,9 +27,10 @@ public class Transaction {
 
     @ManyToOne
     private CourseClient courseClient; // if courseClient is null = withdraw
+    // not validated
 
     private LocalDate date;
     private BigDecimal value;
     private TransactionType transactionType;
-    private String description;
+    private String description; // not validated
 }

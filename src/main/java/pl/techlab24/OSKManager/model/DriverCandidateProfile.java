@@ -34,5 +34,5 @@ public class DriverCandidateProfile {
     private LocalDate addedDate;
 
     @ManyToOne
-    private Client client;
+    private Client client; // not validated
 }

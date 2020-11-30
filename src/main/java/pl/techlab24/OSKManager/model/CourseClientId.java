@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class CourseClientId implements Serializable {
+public class CourseClientId implements Serializable { // must not be validated
 
     @Column(name = "course_id")
     private Long courseId;
