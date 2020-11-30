@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class SexTest {
+    
     @Test
     void sexValueFemaleShouldExist() {
         assertThat(Sex.valueOf("Female"), is(notNullValue()));

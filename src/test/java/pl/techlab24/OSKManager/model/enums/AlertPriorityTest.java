@@ -8,7 +8,6 @@ import static org.hamcrest.Matchers.notNullValue;
 
 public class AlertPriorityTest {
 
-
     @Test
     void alertPriorityValueNormalShouldExist() {
         assertThat(AlertPriority.valueOf("Normal"), is(notNullValue()));
