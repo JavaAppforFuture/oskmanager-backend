@@ -33,6 +33,6 @@ public class Instructor extends User {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Car> cars;
 
-    @OneToOne
-    private Ride ride;
+    @OneToMany
+    private List<Ride> ride;
 }

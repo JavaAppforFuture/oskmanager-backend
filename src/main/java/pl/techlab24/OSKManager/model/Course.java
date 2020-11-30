@@ -32,7 +32,7 @@ public class Course {
 
     private String courseNumber;
     private LocalDate startDate;
-    private LocalDate endDate;
+    private LocalDate endDate; // not validated (set when all rides done)
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Category category;
@@ -40,7 +40,7 @@ public class Course {
     private BigDecimal defaultPrice;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course", orphanRemoval = true)
-    private List<CourseClient> courseClients = new ArrayList<>();
+    private List<CourseClient> courseClients = new ArrayList<>(); // not validated
 
     public void addClient(Client client) {
         CourseClient courseClient = new CourseClient(this, client);
