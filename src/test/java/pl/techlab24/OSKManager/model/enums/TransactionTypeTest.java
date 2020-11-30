@@ -22,5 +22,4 @@ public class TransactionTypeTest {
     void transactionTypeValueBanTransferShouldExist() {
         assertThat(TransactionType.valueOf("BankTransfer"), is(notNullValue()));
     }
-
 }
