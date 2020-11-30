@@ -17,5 +17,4 @@ public class AlertTypeTest {
     void alertTypeValueInsuranceShouldExist() {
         assertThat(AlertType.valueOf("Insurance"), is(notNullValue()));
     }
-
 }
