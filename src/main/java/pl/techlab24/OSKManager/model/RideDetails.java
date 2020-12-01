@@ -28,5 +28,5 @@ public class RideDetails {
     private BigDecimal duration;
 
     @ManyToOne
-    private Ride ride;
+    private Ride ride; // not validated
 }

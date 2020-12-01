@@ -32,7 +32,7 @@ public class CourseClient {
     @OneToMany
     private List<Transaction> transactions;
 
-    private BigDecimal customPrice;
+    private BigDecimal customPrice; // only this variable must be validated
 
     public CourseClient() {
     }
