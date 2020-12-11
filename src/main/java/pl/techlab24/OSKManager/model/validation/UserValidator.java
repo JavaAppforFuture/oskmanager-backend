@@ -33,6 +33,9 @@ public class UserValidator extends Validator {
         }
 
         //TODO: add validation to check email address pattern
+        if (!RegexPatterns.emailPatternCheck(email)) {
+            return "Email does not match the pattern";
+        }
 
         return null;
     }
@@ -55,12 +58,20 @@ public class UserValidator extends Validator {
             return "Name cannot be null";
         }
 
+        if (name.trim().isEmpty()) {
+            return "Name must contain at least 1 character";
+        }
+
         return null;
     }
 
     private static String validateSecondName(String secondName) {
         if (secondName == null) {
             return "Second name cannot be null";
+        }
+
+        if (secondName.trim().isEmpty()) {
+            return "Second name must contain at least 1 character";
         }
 
         return null;
@@ -88,6 +99,9 @@ public class UserValidator extends Validator {
         }
 
         //TODO: add validation to check phone number pattern
+        if (!RegexPatterns.phonePatternCheck(phoneNumber)) {
+            return "Phone number does not match the pattern";
+        }
 
         return null;
     }
