@@ -9,8 +9,6 @@ import java.util.List;
 
 public class ClientValidator extends Validator {
 
-    List<String> inputValues;
-
     public static List<String> validate(Client client) {
         if (client == null) {
             return Collections.singletonList("Client cannot be null.");
