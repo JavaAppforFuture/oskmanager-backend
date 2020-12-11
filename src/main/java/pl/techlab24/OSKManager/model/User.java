@@ -1,7 +1,16 @@
 package pl.techlab24.OSKManager.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.techlab24.OSKManager.model.enums.Sex;
 
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     private String email;
@@ -12,4 +21,5 @@ public class User {
     private Sex sex;
     private String phoneNumber;
     private String defaultPassword;
+
 }
