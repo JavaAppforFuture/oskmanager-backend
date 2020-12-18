@@ -5,7 +5,7 @@ import pl.techlab24.OSKManager.model.enums.Sex;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
+@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 @Inheritance
 public abstract class User {
 
