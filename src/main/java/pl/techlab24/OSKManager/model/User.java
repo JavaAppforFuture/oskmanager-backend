@@ -2,7 +2,15 @@ package pl.techlab24.OSKManager.model;
 
 import pl.techlab24.OSKManager.model.enums.Sex;
 
-public class User {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
+@Inheritance
+public abstract class User {
+
+    @Id
+    private Long id;
 
     private String email;
     private String password;
