@@ -17,10 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Instructor extends User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Category> categories;
 
