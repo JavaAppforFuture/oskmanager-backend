@@ -1,10 +1,10 @@
 package pl.techlab24.OSKManager.model;
 
+import javax.persistence.Entity;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Entity;
 
 @Entity
 @Data
