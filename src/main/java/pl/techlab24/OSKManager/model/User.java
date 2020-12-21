@@ -27,4 +27,5 @@ public abstract class User {
     private Sex sex;
     private String phoneNumber;
     private String defaultPassword;
+    private String role;
 }
