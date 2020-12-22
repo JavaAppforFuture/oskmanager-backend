@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RideDetailsValidation extends Validator {
+public class RideDetailsValidatior extends Validator {
 
     public static List<String> validate(RideDetails rideDetails) {
         if (rideDetails == null) {
