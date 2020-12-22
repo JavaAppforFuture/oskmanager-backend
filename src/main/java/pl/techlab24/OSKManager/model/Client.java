@@ -29,15 +29,6 @@ public class Client extends User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String street;
-    private String houseNumber;
-    private String apartmentNumber;
-    private String postcode;
-    private String city;
-    private String pesel; // date of birth accepted
-    private DocumentType documentType;
-    private String documentNumber;
-
     @OneToMany(mappedBy = "client")
     private List<DriverCandidateProfile> driverCandidateProfile; // not validated
 
