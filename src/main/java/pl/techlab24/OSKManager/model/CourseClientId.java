@@ -40,11 +40,15 @@ public class CourseClientId implements Serializable { // must not be validated
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CourseClientId)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof CourseClientId)) {
+            return false;
+        }
         CourseClientId that = (CourseClientId) o;
-        return Objects.equals(courseId, that.courseId) &&
-            Objects.equals(clientId, that.clientId);
+        return Objects.equals(courseId, that.courseId)
+            && Objects.equals(clientId, that.clientId);
     }
 
     @Override
