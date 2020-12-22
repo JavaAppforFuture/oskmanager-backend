@@ -11,7 +11,7 @@ public class UserValidator extends Validator {
 
     public static List<String> validate(User user) {
         if (user == null) {
-            return Collections.singletonList("User cannot be null");
+            return Collections.singletonList("User cannot be null.");
         }
 
         List<String> result = new ArrayList<>();
