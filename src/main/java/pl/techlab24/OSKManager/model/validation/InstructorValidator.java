@@ -23,7 +23,7 @@ public class InstructorValidator extends Validator {
         for (Category category : instructor.getCategories()) {
             addResultOfValidation(result, validateCategory(category));
         }
-
+        
         addResultOfValidation(result, validateStandardPaymentRate(instructor.getStandardPaymentRate()));
         addResultOfValidation(result, validateAdditionalPaymentRate(instructor.getAdditionalPaymentRate()));
         addResultOfValidation(result, validateInstructorNumber(instructor.getInstructorNumber()));
