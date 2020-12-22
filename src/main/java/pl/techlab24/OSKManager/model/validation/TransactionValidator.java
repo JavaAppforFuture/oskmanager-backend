@@ -13,7 +13,7 @@ public class TransactionValidator extends Validator {
 
     public static List<String> validate(Transaction transaction) {
         if (transaction == null) {
-            return Collections.singletonList("User cannot be null");
+            return Collections.singletonList("User cannot be null.");
         }
 
         List<String> result = new ArrayList<>();
@@ -27,7 +27,7 @@ public class TransactionValidator extends Validator {
 
     private static String validateDate(LocalDate date) {
         if (date == null) {
-            return  "Date of transaction cannot be null";
+            return  "Date of transaction cannot be null.";
         }
 
         return null;
@@ -35,12 +35,12 @@ public class TransactionValidator extends Validator {
 
     private static String validateTransactionValue(BigDecimal value) {
         if (value == null) {
-            return "Transaction value cannot be null";
+            return "Transaction value cannot be null.";
 
         }
 
         if (value.compareTo(BigDecimal.ZERO) < 0) {
-            return "Transaction value cannot be lower than 0";
+            return "Transaction value cannot be lower than 0.";
 
         }
 
@@ -49,7 +49,7 @@ public class TransactionValidator extends Validator {
 
     private static String validateTransactionType(TransactionType transactionType) {
         if (transactionType == null) {
-            return "Transaction type cannot be null";
+            return "Transaction type cannot be null.";
         }
 
         return null;

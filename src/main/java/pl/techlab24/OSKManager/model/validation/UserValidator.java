@@ -23,6 +23,7 @@ public class UserValidator extends Validator {
         addResultOfValidation(result, validateSurName(user.getSurname()));
         addResultOfValidation(result, validateSex(user.getSex()));
         addResultOfValidation(result, validatePhoneNumber(user.getPhoneNumber()));
+        addResultOfValidation(result, validateRole(user.getRole()));
 
         return result;
     }
@@ -101,6 +102,14 @@ public class UserValidator extends Validator {
         //TODO: add validation to check phone number pattern
         if (!RegexPatterns.phonePatternCheck(phoneNumber)) {
             return "Phone number does not match the pattern";
+        }
+
+        return null;
+    }
+
+    private static String validateRole(String role) {
+        if (role == null) {
+            return "Role cannot be null.";
         }
 
         return null;
