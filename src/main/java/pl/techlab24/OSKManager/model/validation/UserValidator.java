@@ -30,12 +30,12 @@ public class UserValidator extends Validator {
 
     private static String validateEmail(String email) {
         if (email == null) {
-            return "Email address cannot be null";
+            return "Email address cannot be null.";
         }
 
         //TODO: add validation to check email address pattern
         if (!RegexPatterns.emailPatternCheck(email)) {
-            return "Email does not match the pattern";
+            return "Email does not match the pattern.";
         }
 
         return null;
@@ -43,12 +43,12 @@ public class UserValidator extends Validator {
 
     private static String validatePassword(String password) {
         if (password == null) {
-            return "Password cannot be null";
+            return "Password cannot be null.";
         }
 
         //this is just an example, password may have other min. length
         if (password.trim().length() < 8) {
-            return "Password must contain at least 8 characters";
+            return "Password must contain at least 8 characters.";
         }
 
         return null;
@@ -56,11 +56,11 @@ public class UserValidator extends Validator {
 
     private static String validateName(String name) {
         if (name == null) {
-            return "Name cannot be null";
+            return "Name cannot be null.";
         }
 
         if (name.trim().isEmpty()) {
-            return "Name must contain at least 1 character";
+            return "Name must contain at least 1 character.";
         }
 
         return null;
@@ -68,11 +68,11 @@ public class UserValidator extends Validator {
 
     private static String validateSecondName(String secondName) {
         if (secondName == null) {
-            return "Second name cannot be null";
+            return "Second name cannot be null.";
         }
 
         if (secondName.trim().isEmpty()) {
-            return "Second name must contain at least 1 character";
+            return "Second name must contain at least 1 character.";
         }
 
         return null;
@@ -80,7 +80,7 @@ public class UserValidator extends Validator {
 
     private static String validateSurName(String surName) {
         if (surName == null) {
-            return "Surname name cannot be null";
+            return "Surname name cannot be null.";
         }
 
         return null;
@@ -88,7 +88,7 @@ public class UserValidator extends Validator {
 
     private static String validateSex(Sex sex) {
         if (sex == null) {
-            return "Sex cannot be null";
+            return "Sex cannot be null.";
         }
 
         return null;
@@ -96,12 +96,12 @@ public class UserValidator extends Validator {
 
     private static String validatePhoneNumber(String phoneNumber) {
         if (phoneNumber == null) {
-            return "Phone number cannot be null";
+            return "Phone number cannot be null.";
         }
 
         //TODO: add validation to check phone number pattern
         if (!RegexPatterns.phonePatternCheck(phoneNumber)) {
-            return "Phone number does not match the pattern";
+            return "Phone number does not match the pattern.";
         }
 
         return null;
