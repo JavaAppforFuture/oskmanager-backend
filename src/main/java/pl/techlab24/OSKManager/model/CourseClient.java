@@ -77,13 +77,17 @@ public class CourseClient {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CourseClient)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof CourseClient)) {
+            return false;
+        }
         CourseClient that = (CourseClient) o;
-        return Objects.equals(id, that.id) &&
-            Objects.equals(client, that.client) &&
-            Objects.equals(course, that.course) &&
-            Objects.equals(customPrice, that.customPrice);
+        return Objects.equals(id, that.id)
+            && Objects.equals(client, that.client)
+            && Objects.equals(course, that.course)
+            && Objects.equals(customPrice, that.customPrice);
     }
 
     @Override
