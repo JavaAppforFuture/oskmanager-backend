@@ -8,6 +8,7 @@ import java.util.List;
 
 import pl.techlab24.OSKManager.model.Category;
 import pl.techlab24.OSKManager.model.Instructor;
+import pl.techlab24.OSKManager.model.User;
 
 public class InstructorValidator extends Validator {
 
@@ -22,7 +23,7 @@ public class InstructorValidator extends Validator {
             addResultOfValidation(result, validateCategory(category));
         }
 
-        addResultOfValidation(result, UserValidator.validate(instructor));
+        addResultOfValidation(result, validateUser(instructor));
         addResultOfValidation(result, validateStandardPaymentRate(instructor.getStandardPaymentRate()));
         addResultOfValidation(result, validateAdditionalPaymentRate(instructor.getAdditionalPaymentRate()));
         addResultOfValidation(result, validateInstructorNumber(instructor.getInstructorNumber()));
@@ -33,6 +34,10 @@ public class InstructorValidator extends Validator {
 
     private static List<String> validateCategory(Category category) {
         return CategoryValidator.validate(category);
+    }
+
+    private static List<String> validateUser(User user) {
+        return UserValidator.validate(user);
     }
 
     private static String validateStandardPaymentRate(BigDecimal standardPaymentRate) {
