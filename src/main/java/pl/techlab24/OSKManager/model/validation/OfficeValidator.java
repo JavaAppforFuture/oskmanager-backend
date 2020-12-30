@@ -23,5 +23,4 @@ public class OfficeValidator extends Validator {
     private static List<String> validateUser(User user) {
         return UserValidator.validate(user);
     }
-
 }
