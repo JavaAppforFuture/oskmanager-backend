@@ -18,12 +18,11 @@ public class InstructorValidator extends Validator {
 
         List<String> result = new ArrayList<>();
 
-        // TODO: all User variables are validated in UserValidator class
-
         for (Category category : instructor.getCategories()) {
             addResultOfValidation(result, validateCategory(category));
         }
-        
+
+        addResultOfValidation(result, UserValidator.validate(instructor));
         addResultOfValidation(result, validateStandardPaymentRate(instructor.getStandardPaymentRate()));
         addResultOfValidation(result, validateAdditionalPaymentRate(instructor.getAdditionalPaymentRate()));
         addResultOfValidation(result, validateInstructorNumber(instructor.getInstructorNumber()));
