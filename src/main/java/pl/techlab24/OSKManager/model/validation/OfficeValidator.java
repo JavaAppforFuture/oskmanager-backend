@@ -8,6 +8,7 @@ import pl.techlab24.OSKManager.model.Office;
 import pl.techlab24.OSKManager.model.User;
 
 public class OfficeValidator extends Validator {
+
     public static List<String> validate(Office office) {
         if (office == null) {
             return Collections.singletonList("Office cannot be null.");

@@ -2,7 +2,7 @@ package pl.techlab24.OSKManager.model.validation;
 
 import java.util.regex.Pattern;
 
- class RegexPatterns {
+class RegexPatterns {
 
     private static final Pattern emailPattern =
             Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}");
