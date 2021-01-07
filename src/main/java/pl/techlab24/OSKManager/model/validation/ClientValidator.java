@@ -88,11 +88,11 @@ public class ClientValidator extends Validator {
         if (pesel == null) {
             return "Pesel number cannot be null.";
         }
-        if (pesel.trim().isEmpty()) {
-            return "Pesel number must contain at least 1 character.";
-        }
         if (!RegexPatterns.peselPatternCheck(pesel)) {
-            return "Pesel number does not match correct pattern.";
+            return "Pesel number does not match correct pesel pattern.";
+        }
+        if (!checkSum(pesel)) {
+            return "Pesel number is incorrect.";
         }
         return null;
     }
@@ -112,5 +112,33 @@ public class ClientValidator extends Validator {
             return "Document number must contain at least 1 character.";
         }
         return null;
+    }
+
+    private static boolean checkSum(String pesel) {
+        int lastDigit;
+        int[] peselNumbers =  new int[11];
+
+        for (int i = 0; i < pesel.length(); i++) {
+            peselNumbers[i] = Integer.parseInt(String.valueOf(pesel.charAt(i)));
+        }
+
+        int sum = peselNumbers[0] +
+            peselNumbers[1] * 3 +
+            peselNumbers[2] * 7 +
+            peselNumbers[3] * 9 +
+            peselNumbers[4] +
+            peselNumbers[5] * 3 +
+            peselNumbers[6] * 7 +
+            peselNumbers[7] * 9 +
+            peselNumbers[8] +
+            peselNumbers[9] * 3;
+
+        if ((sum %=10) == 0) {
+            lastDigit = 0;
+        } else {
+            lastDigit = 10 - (sum%10);
+        }
+
+        return lastDigit == peselNumbers[10];
     }
 }

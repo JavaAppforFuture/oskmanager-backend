@@ -90,7 +90,7 @@ public class UserValidator extends Validator {
             return "Phone number cannot be null.";
         }
         if (!RegexPatterns.phonePatternCheck(phoneNumber)) {
-            return "Phone number does not match correct pattern.";
+            return "Phone number does not match correct phone number pattern.";
         }
         return null;
     }

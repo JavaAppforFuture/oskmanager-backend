@@ -109,7 +109,7 @@
                 <configuration>
                     <excludes>
                         <exclude>/pl/techlab24/OSKManager/model/*.class</exclude>
-                        <!--                        <exclude>/pl/techlab24/OSKManager/model/validation/RegexPatterns.class</exclude>-->
+                        <exclude>/pl/techlab24/OSKManager/model/validation/RegexPatterns.class</exclude>
                         <exclude>/pl/techlab24/OSKManager/model/validation/Validator.class</exclude>
                         <exclude>/pl/techlab24/OSKManager/model/validation/*.class</exclude>
                         <exclude>/pl/techlab24/OSKManager/repository/*.class</exclude>
