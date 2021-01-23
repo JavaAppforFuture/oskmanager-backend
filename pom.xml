@@ -51,7 +51,6 @@
         <!--            <artifactId>spring-security-test</artifactId>-->
         <!--            <scope>test</scope>-->
         <!--        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
@@ -110,7 +109,7 @@
                 <configuration>
                     <excludes>
                         <exclude>/pl/techlab24/OSKManager/model/*.class</exclude>
-                        <!--                        <exclude>/pl/techlab24/OSKManager/model/validation/RegexPatterns.class</exclude>-->
+                        <exclude>/pl/techlab24/OSKManager/model/validation/RegexPatterns.class</exclude>
                         <exclude>/pl/techlab24/OSKManager/model/validation/Validator.class</exclude>
                         <exclude>/pl/techlab24/OSKManager/model/validation/*.class</exclude>
                         <exclude>/pl/techlab24/OSKManager/repository/*.class</exclude>
