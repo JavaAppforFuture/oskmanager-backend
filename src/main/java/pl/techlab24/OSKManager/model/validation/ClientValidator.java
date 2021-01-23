@@ -116,27 +116,27 @@ public class ClientValidator extends Validator {
 
     private static boolean checkSum(String pesel) {
         int lastDigit;
-        int[] peselNumbers =  new int[11];
+        int[] peselNumbers = new int[11];
 
         for (int i = 0; i < pesel.length(); i++) {
             peselNumbers[i] = Integer.parseInt(String.valueOf(pesel.charAt(i)));
         }
 
-        int sum = peselNumbers[0] +
-            peselNumbers[1] * 3 +
-            peselNumbers[2] * 7 +
-            peselNumbers[3] * 9 +
-            peselNumbers[4] +
-            peselNumbers[5] * 3 +
-            peselNumbers[6] * 7 +
-            peselNumbers[7] * 9 +
-            peselNumbers[8] +
-            peselNumbers[9] * 3;
+        int sum = peselNumbers[0]
+            + peselNumbers[1] * 3
+            + peselNumbers[2] * 7
+            + peselNumbers[3] * 9
+            + peselNumbers[4]
+            + peselNumbers[5] * 3
+            + peselNumbers[6] * 7
+            + peselNumbers[7] * 9
+            + peselNumbers[8]
+            + peselNumbers[9] * 3;
 
-        if ((sum %=10) == 0) {
+        if ((sum %= 10) == 0) {
             lastDigit = 0;
         } else {
-            lastDigit = 10 - (sum%10);
+            lastDigit = 10 - (sum % 10);
         }
 
         return lastDigit == peselNumbers[10];
