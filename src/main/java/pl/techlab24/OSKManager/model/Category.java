@@ -26,11 +26,11 @@ public class Category {
     private String categoryName;
 
     @OneToOne
-    private Course course;
+    private Course course; // not validated
 
     @OneToOne
-    private DriverCandidateProfile driverCandidateProfile;
+    private DriverCandidateProfile driverCandidateProfile; // not validated
 
     @ManyToOne
-    private Instructor instructor;
+    private Instructor instructor; // not validated
 }

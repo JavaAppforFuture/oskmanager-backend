@@ -35,8 +35,8 @@ public class Car {
     private LocalDate endOfInsurance;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Instructor> instructors;
+    private List<Instructor> instructors; // not validated
 
     @OneToMany
-    private List<Ride> ride;
+    private List<Ride> ride; // not validated
 }

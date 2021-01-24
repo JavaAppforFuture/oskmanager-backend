@@ -32,6 +32,6 @@ public abstract class User {
     private String surname;
     private Sex sex;
     private String phoneNumber;
-    private String defaultPassword;
+    private String defaultPassword; // not validated
     private String role;
 }

@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Manager extends User {
 
-
 }
