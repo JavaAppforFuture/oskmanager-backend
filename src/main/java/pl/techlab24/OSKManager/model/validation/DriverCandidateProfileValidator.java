@@ -42,6 +42,9 @@ public class DriverCandidateProfileValidator extends Validator {
         if (date == null) {
             return "The date the profile was added cannot be null.";
         }
+        if (date.isAfter(LocalDate.now())) {
+            return "The date the profile was added cannot be later than now.";
+        }
         return null;
     }
 }
