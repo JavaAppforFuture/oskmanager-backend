@@ -17,7 +17,7 @@ class RegexPatterns {
             Pattern.compile("[0-9]{4}[0-3]{1}[0-9]{1}[0-9]{5}");
 
     private static final Pattern dateOfBirthPattern =
-            Pattern.compile("^([0-2][0-9]|(3)[0-1])(\\-)(((0)[0-9])|((1)[0-2]))(\\-)\\d{4}$");
+        Pattern.compile("^([0-2][0-9]|(3)[0-1])([-.])(((0)[0-9])|((1)[0-2]))([-.])\\d{4}$");
 
     static boolean emailPatternCheck(String email) {
         return emailPattern.matcher(email).matches();
