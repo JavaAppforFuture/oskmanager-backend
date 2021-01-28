@@ -66,10 +66,10 @@ public class ClientValidator extends Validator {
 
     private static String validatePostcode(String postcode) {
         if (postcode == null) {
-            return "Postcode number cannot be null.";
+            return "Postcode cannot be null.";
         }
         if (postcode.trim().isEmpty()) {
-            return "Postcode number must contain at least 1 character.";
+            return "Postcode must contain at least 1 character.";
         }
         return null;
     }
@@ -87,6 +87,9 @@ public class ClientValidator extends Validator {
     private static String validatePesel(String pesel) {
         if (pesel == null) {
             return "Pesel number cannot be null.";
+        }
+        if (RegexPatterns.dateOfBirthPatternCheck(pesel)) {
+            return null;
         }
         if (!RegexPatterns.peselPatternCheck(pesel)) {
             return "Pesel number does not match correct pesel pattern.";

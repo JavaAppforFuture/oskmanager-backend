@@ -169,7 +169,7 @@ class UserValidatorTest {
     void shouldValidateNullSex() {
         // given
         User userWithNullSex = correctUser;
-        correctUser.setSex(null);
+        userWithNullSex.setSex(null);
 
         // when
         List<String> resultOfValidation = UserValidator.validate(userWithNullSex);
