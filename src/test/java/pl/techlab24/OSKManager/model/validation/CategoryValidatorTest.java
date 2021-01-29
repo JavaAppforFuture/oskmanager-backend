@@ -12,6 +12,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import pl.techlab24.OSKManager.model.Category;
+import pl.techlab24.OSKManager.model.Course;
+import pl.techlab24.OSKManager.model.DriverCandidateProfile;
+import pl.techlab24.OSKManager.model.Instructor;
 
 class CategoryValidatorTest {
 
@@ -21,9 +24,9 @@ class CategoryValidatorTest {
     void setup() {
         correctCategory = new Category(1L,
             "Test category",
-            null,
-            null,
-            null);
+            new Course(),
+            new DriverCandidateProfile(),
+            new Instructor());
     }
 
     @Test

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
@@ -15,6 +16,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import pl.techlab24.OSKManager.model.Category;
 import pl.techlab24.OSKManager.model.Course;
+import pl.techlab24.OSKManager.model.DriverCandidateProfile;
+import pl.techlab24.OSKManager.model.Instructor;
 
 class CourseValidatorTest {
 
@@ -24,9 +27,9 @@ class CourseValidatorTest {
     void setup() {
         Category correctCategory = new Category(1L,
             "Test category",
-            null,
-            null,
-            null);
+            new Course(),
+            new DriverCandidateProfile(),
+            new Instructor());
 
         correctCourse = new Course(1L,
             "AAA-1",
@@ -34,7 +37,7 @@ class CourseValidatorTest {
             LocalDate.of(2100, 12, 31),
             correctCategory,
             BigDecimal.valueOf(1_000L),
-            null
+            new ArrayList<>()
         );
     }
 

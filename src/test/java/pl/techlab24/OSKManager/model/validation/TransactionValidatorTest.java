@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import pl.techlab24.OSKManager.model.CourseClient;
 import pl.techlab24.OSKManager.model.Transaction;
 import pl.techlab24.OSKManager.model.enums.TransactionType;
 
@@ -23,7 +24,7 @@ class TransactionValidatorTest {
     @BeforeEach
     void setup() {
         correctTransaction = new Transaction(1L,
-            null,
+            new CourseClient(),
             LocalDate.of(2020, 10, 10),
             BigDecimal.valueOf(1_000L),
             TransactionType.Cash,

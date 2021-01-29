@@ -20,6 +20,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.MockedStatic;
 import pl.techlab24.OSKManager.model.Category;
+import pl.techlab24.OSKManager.model.Course;
+import pl.techlab24.OSKManager.model.DriverCandidateProfile;
 import pl.techlab24.OSKManager.model.Instructor;
 import pl.techlab24.OSKManager.model.enums.Sex;
 
@@ -31,15 +33,15 @@ class InstructorValidatorTest {
     void setup() {
         Category categoryA = new Category(1L,
             "A",
-            null,
-            null,
-            null);
+            new Course(),
+            new DriverCandidateProfile(),
+            new Instructor());
 
-        Category categoryB = new Category(1L,
+        Category categoryB = new Category(2L,
             "B",
-            null,
-            null,
-            null);
+            new Course(),
+            new DriverCandidateProfile(),
+            new Instructor());
 
         correctInstructor = Instructor.builder()
             .id(1L)

@@ -14,8 +14,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import pl.techlab24.OSKManager.model.Car;
-import pl.techlab24.OSKManager.model.Instructor;
-import pl.techlab24.OSKManager.model.Ride;
 
 class CarValidatorTest {
 
@@ -30,8 +28,8 @@ class CarValidatorTest {
             2020,
             LocalDate.of(2030, 12, 31),
             LocalDate.of(2030, 12, 31),
-            new ArrayList<Instructor>(),
-            new ArrayList<Ride>()
+            new ArrayList<>(),
+            new ArrayList<>()
         );
     }
 
