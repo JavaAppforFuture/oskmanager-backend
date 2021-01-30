@@ -25,20 +25,23 @@ class CourseValidatorTest {
 
     @BeforeEach
     void setup() {
-        Category correctCategory = new Category(1L,
-            "Test category",
-            new Course(),
-            new DriverCandidateProfile(),
-            new Instructor());
+        Category correctCategory = Category.builder()
+            .id(1L)
+            .categoryName("Test category")
+            .course(new Course())
+            .driverCandidateProfile(new DriverCandidateProfile())
+            .instructor(new Instructor())
+            .build();
 
-        correctCourse = new Course(1L,
-            "AAA-1",
-            LocalDate.of(2021, 1, 25),
-            LocalDate.of(2100, 12, 31),
-            correctCategory,
-            BigDecimal.valueOf(1_000L),
-            new ArrayList<>()
-        );
+        correctCourse = Course.builder()
+            .id(1L)
+            .courseNumber("AAA-1")
+            .startDate(LocalDate.of(2021, 1, 25))
+            .endDate(LocalDate.of(2100, 12, 31))
+            .category(correctCategory)
+            .defaultPrice(BigDecimal.valueOf(1_000L))
+            .courseClients(new ArrayList<>())
+            .build();
     }
 
     @Test
@@ -56,8 +59,7 @@ class CourseValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfCourseNumbersAndValidationResults")
     void shouldValidateCourseNumber(String courseNumber, List<String> expected) {
-        Course courseWithVariableCourseNumber = correctCourse;
-        correctCourse.setCourseNumber(courseNumber);
+        Course courseWithVariableCourseNumber = correctCourse.toBuilder().courseNumber(courseNumber).build();
 
         List<String> resultOfValidation = CourseValidator.validate(courseWithVariableCourseNumber);
 
@@ -78,8 +80,7 @@ class CourseValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfStartDatesAndValidationResults")
     void shouldValidateStartDate(LocalDate startDate, List<String> expected) {
-        Course courseWithVariableStartDate = correctCourse;
-        correctCourse.setStartDate(startDate);
+        Course courseWithVariableStartDate = correctCourse.toBuilder().startDate(startDate).build();
 
         List<String> resultOfValidation = CourseValidator.validate(courseWithVariableStartDate);
 
@@ -99,8 +100,7 @@ class CourseValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfCategoriesAndValidationResults")
     void shouldValidateCategory(Category category, List<String> expected) {
-        Course courseWithVariableCategory = correctCourse;
-        correctCourse.setCategory(category);
+        Course courseWithVariableCategory = correctCourse.toBuilder().category(category).build();
 
         List<String> resultOfValidation = CourseValidator.validate(courseWithVariableCategory);
 
@@ -108,23 +108,20 @@ class CourseValidatorTest {
     }
 
     private static Stream<Arguments> setOfCategoriesAndValidationResults() {
-        Category correctCategory = new Category(1L,
-            "Test category",
-            null,
-            null,
-            null);
+        Category correctCategory = Category.builder()
+            .id(1L)
+            .categoryName("Test category")
+            .build();
 
-        Category incorrectCategoryWithNullCategoryName = new Category(1L,
-            null,
-            null,
-            null,
-            null);
+        Category incorrectCategoryWithNullCategoryName = Category.builder()
+            .id(1L)
+            .categoryName(null)
+            .build();
 
-        Category incorrectCategoryWithEmptyCategoryName = new Category(1L,
-            "",
-            null,
-            null,
-            null);
+        Category incorrectCategoryWithEmptyCategoryName = Category.builder()
+            .id(1L)
+            .categoryName("")
+            .build();
 
         return Stream.of(
             Arguments.of(null, Collections.singletonList("Category cannot be null.")),
@@ -137,8 +134,7 @@ class CourseValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfDefaultPricesAndValidationResults")
     void shouldValidateDefaultPrice(BigDecimal defaultPrice, List<String> expected) {
-        Course courseWithVariableDefaultPrice = correctCourse;
-        correctCourse.setDefaultPrice(defaultPrice);
+        Course courseWithVariableDefaultPrice = correctCourse.toBuilder().defaultPrice(defaultPrice).build();
 
         List<String> resultOfValidation = CourseValidator.validate(courseWithVariableDefaultPrice);
 

@@ -24,18 +24,21 @@ class DriverCandidateProfileValidatorTest {
 
     @BeforeEach
     void setup() {
-        Category correctCategory = new Category(1L,
-            "Test category",
-            new Course(),
-            new DriverCandidateProfile(),
-            new Instructor());
+        Category correctCategory = Category.builder()
+            .id(1L)
+            .categoryName("Test category")
+            .course(new Course())
+            .driverCandidateProfile(new DriverCandidateProfile())
+            .instructor(new Instructor())
+            .build();
 
-        correctDriverCandidateProfile = new DriverCandidateProfile(1L,
-            "Test number",
-            correctCategory,
-            LocalDate.of(2000, 1, 1),
-            new Client()
-        );
+        correctDriverCandidateProfile = DriverCandidateProfile.builder()
+            .id(1L)
+            .number("Test number")
+            .category(correctCategory)
+            .addedDate(LocalDate.of(2000, 1, 1))
+            .client(new Client())
+            .build();
     }
 
     @Test
@@ -53,8 +56,8 @@ class DriverCandidateProfileValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfNumbersAndValidationResults")
     void shouldValidateNumber(String number, List<String> expected) {
-        DriverCandidateProfile driverCandidateProfileWithVariableNumber = correctDriverCandidateProfile;
-        driverCandidateProfileWithVariableNumber.setNumber(number);
+        DriverCandidateProfile driverCandidateProfileWithVariableNumber =
+            correctDriverCandidateProfile.toBuilder().number(number).build();
 
         List<String> resultOfValidation = DriverCandidateProfileValidator.validate(driverCandidateProfileWithVariableNumber);
 
@@ -75,8 +78,8 @@ class DriverCandidateProfileValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfCategoriesAndValidationResults")
     void shouldValidateCategory(Category category, List<String> expected) {
-        DriverCandidateProfile driverCandidateProfileWithVariableCategory = correctDriverCandidateProfile;
-        correctDriverCandidateProfile.setCategory(category);
+        DriverCandidateProfile driverCandidateProfileWithVariableCategory =
+            correctDriverCandidateProfile.toBuilder().category(category).build();
 
         List<String> resultOfValidation = DriverCandidateProfileValidator.validate(driverCandidateProfileWithVariableCategory);
 
@@ -84,23 +87,20 @@ class DriverCandidateProfileValidatorTest {
     }
 
     private static Stream<Arguments> setOfCategoriesAndValidationResults() {
-        Category correctCategory = new Category(1L,
-            "Test category",
-            null,
-            null,
-            null);
+        Category correctCategory = Category.builder()
+            .id(1L)
+            .categoryName("Test category")
+            .build();
 
-        Category incorrectCategoryWithNullCategoryName = new Category(1L,
-            null,
-            null,
-            null,
-            null);
+        Category incorrectCategoryWithNullCategoryName = Category.builder()
+            .id(1L)
+            .categoryName(null)
+            .build();
 
-        Category incorrectCategoryWithEmptyCategoryName = new Category(1L,
-            "",
-            null,
-            null,
-            null);
+        Category incorrectCategoryWithEmptyCategoryName = Category.builder()
+            .id(1L)
+            .categoryName("")
+            .build();
 
         return Stream.of(
             Arguments.of(null, Collections.singletonList("Category cannot be null.")),
@@ -113,8 +113,8 @@ class DriverCandidateProfileValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfAddedDatesAndValidationResults")
     void shouldValidateAddedDate(LocalDate addedDate, List<String> expected) {
-        DriverCandidateProfile driverCandidateProfileWithVariableAddedDate = correctDriverCandidateProfile;
-        driverCandidateProfileWithVariableAddedDate.setAddedDate(addedDate);
+        DriverCandidateProfile driverCandidateProfileWithVariableAddedDate =
+            correctDriverCandidateProfile.toBuilder().addedDate(addedDate).build();
 
         List<String> resultOfValidation = DriverCandidateProfileValidator.validate(driverCandidateProfileWithVariableAddedDate);
 

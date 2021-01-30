@@ -22,11 +22,12 @@ class RideDetailsValidatorTest {
 
     @BeforeEach
     void setup() {
-        correctRideDetails = new RideDetails(1L,
-            RideType.Normal,
-            BigDecimal.valueOf(1L),
-            new Ride()
-        );
+        correctRideDetails = RideDetails.builder()
+            .id(1L)
+            .rideType(RideType.Normal)
+            .duration(BigDecimal.valueOf(1L))
+            .ride(new Ride())
+            .build();
     }
 
     @Test
@@ -44,8 +45,7 @@ class RideDetailsValidatorTest {
     @Test
     void shouldValidateNullRideType() {
         // given
-        RideDetails rideDetailsWithNullRideType = correctRideDetails;
-        rideDetailsWithNullRideType.setRideType(null);
+        RideDetails rideDetailsWithNullRideType = correctRideDetails.toBuilder().rideType(null).build();
 
         // when
         List<String> resultOfValidation = RideDetailsValidator.validate(rideDetailsWithNullRideType);
@@ -57,8 +57,7 @@ class RideDetailsValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfRideDurationsAndValidationResults")
     void shouldValidateRideDuration(BigDecimal rideDuration, List<String> expected) {
-        RideDetails rideDetailsWithVariableRideDuration = correctRideDetails;
-        rideDetailsWithVariableRideDuration.setDuration(rideDuration);
+        RideDetails rideDetailsWithVariableRideDuration = correctRideDetails.toBuilder().duration(rideDuration).build();
 
         List<String> resultOfValidation = RideDetailsValidator.validate(rideDetailsWithVariableRideDuration);
 

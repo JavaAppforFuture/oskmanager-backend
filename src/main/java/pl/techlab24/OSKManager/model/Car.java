@@ -15,9 +15,11 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "car")
+@SuperBuilder(toBuilder = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,5 +40,5 @@ public class Car {
     private List<Instructor> instructors; // not validated
 
     @OneToMany
-    private List<Ride> ride; // not validated
+    private List<Ride> rides; // not validated
 }

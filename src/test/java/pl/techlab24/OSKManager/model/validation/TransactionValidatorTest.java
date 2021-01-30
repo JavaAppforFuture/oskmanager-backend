@@ -23,13 +23,14 @@ class TransactionValidatorTest {
 
     @BeforeEach
     void setup() {
-        correctTransaction = new Transaction(1L,
-            new CourseClient(),
-            LocalDate.of(2020, 10, 10),
-            BigDecimal.valueOf(1_000L),
-            TransactionType.Cash,
-            null
-        );
+        correctTransaction = Transaction.builder()
+            .id(1L)
+            .courseClient(new CourseClient())
+            .date(LocalDate.of(2020, 10, 10))
+            .value(BigDecimal.valueOf(1_000L))
+            .transactionType(TransactionType.Cash)
+            .description(null)
+            .build();
     }
 
     @Test
@@ -47,8 +48,7 @@ class TransactionValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfTransactionDatesAndValidationResults")
     void shouldValidateTransactionDate(LocalDate transactionDate, List<String> expected) {
-        Transaction transactionWithVariableDate = correctTransaction;
-        transactionWithVariableDate.setDate(transactionDate);
+        Transaction transactionWithVariableDate = correctTransaction.toBuilder().date(transactionDate).build();
 
         List<String> resultOfValidation = TransactionValidator.validate(transactionWithVariableDate);
 
@@ -67,8 +67,7 @@ class TransactionValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfTransactionValuesAndValidationResults")
     void shouldValidateTransactionValue(BigDecimal value, List<String> expected) {
-        Transaction transactionWithVariableValue = correctTransaction;
-        transactionWithVariableValue.setValue(value);
+        Transaction transactionWithVariableValue = correctTransaction.toBuilder().value(value).build();
 
         List<String> resultOfValidation = TransactionValidator.validate(transactionWithVariableValue);
 
@@ -87,8 +86,7 @@ class TransactionValidatorTest {
     @Test
     void shouldValidateNullTransactionType() {
         // given
-        Transaction transactionWithNullTransactionType = correctTransaction;
-        transactionWithNullTransactionType.setTransactionType(null);
+        Transaction transactionWithNullTransactionType = correctTransaction.toBuilder().transactionType(null).build();
 
         // when
         List<String> resultOfValidation = TransactionValidator.validate(transactionWithNullTransactionType);

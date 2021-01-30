@@ -209,7 +209,7 @@ class ClientValidatorTest {
     }
 
     @Test
-    void shouldValidateDocumentType() {
+    void shouldValidateNullDocumentType() {
         // given
         Client clientWithNullDocumentType = correctClient.toBuilder().documentType(null).build();
 
@@ -223,8 +223,7 @@ class ClientValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfDocumentNumbersAndValidationResults")
     void shouldValidateDocumentNumber(String documentNumber, List<String> expected) {
-        Client clientWithVariableDocumentNumber = correctClient;
-        clientWithVariableDocumentNumber.setDocumentNumber(documentNumber);
+        Client clientWithVariableDocumentNumber = correctClient.toBuilder().documentNumber(documentNumber).build();
 
         List<String> resultOfValidation = ClientValidator.validate(clientWithVariableDocumentNumber);
 

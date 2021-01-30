@@ -21,16 +21,17 @@ class CarValidatorTest {
 
     @BeforeEach
     void setup() {
-        correctCar = new Car(1L,
-            "Ford",
-            "Focus",
-            "WW 12345",
-            2020,
-            LocalDate.of(2030, 12, 31),
-            LocalDate.of(2030, 12, 31),
-            new ArrayList<>(),
-            new ArrayList<>()
-        );
+        correctCar = Car.builder()
+            .id(1L)
+            .mark("Ford")
+            .model("Focus")
+            .plate("WW 12345")
+            .productionYear(2020)
+            .endOfReview(LocalDate.of(2030, 12, 31))
+            .endOfInsurance(LocalDate.of(2030, 12, 31))
+            .instructors(new ArrayList<>())
+            .rides(new ArrayList<>())
+            .build();
     }
 
     @Test
@@ -48,8 +49,7 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfMarksAndValidationResults")
     void shouldValidateMark(String mark, List<String> expected) {
-        Car carWithVariableName = correctCar;
-        carWithVariableName.setMark(mark);
+        Car carWithVariableName = correctCar.toBuilder().mark(mark).build();
 
         List<String> resultOfValidation = CarValidator.validate(carWithVariableName);
 
@@ -69,8 +69,7 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfModelsAndValidationResults")
     void shouldValidateModel(String model, List<String> expected) {
-        Car carWithVariableModel = correctCar;
-        carWithVariableModel.setModel(model);
+        Car carWithVariableModel = correctCar.toBuilder().model(model).build();
 
         List<String> resultOfValidation = CarValidator.validate(carWithVariableModel);
 
@@ -90,8 +89,7 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfPlatesAndValidationResults")
     void shouldValidatePlate(String plate, List<String> expected) {
-        Car carWithVariablePlate = correctCar;
-        carWithVariablePlate.setPlate(plate);
+        Car carWithVariablePlate = correctCar.toBuilder().plate(plate).build();
 
         List<String> resultOfValidation = CarValidator.validate(carWithVariablePlate);
 
@@ -111,8 +109,7 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfProductionYearsAndValidationResults")
     void shouldValidateProductionYear(Integer productionYear, List<String> expected) {
-        Car carWithVariableProductionYear = correctCar;
-        carWithVariableProductionYear.setProductionYear(productionYear);
+        Car carWithVariableProductionYear = correctCar.toBuilder().productionYear(productionYear).build();
 
         List<String> resultOfValidation = CarValidator.validate(carWithVariableProductionYear);
 
@@ -132,8 +129,7 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfEndOfReviewDatesAndValidationResults")
     void shouldValidateEndOfReviewDate(LocalDate endOfReviewDate, List<String> expected) {
-        Car carWithVariableEndOfReviewDate = correctCar;
-        carWithVariableEndOfReviewDate.setEndOfReview(endOfReviewDate);
+        Car carWithVariableEndOfReviewDate = correctCar.toBuilder().endOfReview(endOfReviewDate).build();
 
         List<String> resultOfValidation = CarValidator.validate(carWithVariableEndOfReviewDate);
 
@@ -151,8 +147,7 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfEndOfInsuranceDatesAndValidationResults")
     void shouldValidateEndOfInsuranceDate(LocalDate endOfInsuranceDate, List<String> expected) {
-        Car carWithVariableEndOfInsuranceDate = correctCar;
-        carWithVariableEndOfInsuranceDate.setEndOfInsurance(endOfInsuranceDate);
+        Car carWithVariableEndOfInsuranceDate = correctCar.toBuilder().endOfInsurance(endOfInsuranceDate).build();
 
         List<String> resultOfValidation = CarValidator.validate(carWithVariableEndOfInsuranceDate);
 

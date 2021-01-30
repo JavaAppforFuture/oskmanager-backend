@@ -36,22 +36,11 @@ class RideValidatorTest {
 
     @BeforeEach
     void setup() {
-        CourseClient firstCourseClient = new CourseClient();
-        CourseClient secondCourseClient = new CourseClient();
-        firstCourseClient.setCustomPrice(BigDecimal.valueOf(2500L));
-        secondCourseClient.setCustomPrice(BigDecimal.valueOf(2800L));
+        CourseClient firstCourseClient = CourseClient.builder().customPrice(BigDecimal.valueOf(2500.00)).build();
+        CourseClient secondCourseClient = CourseClient.builder().customPrice(BigDecimal.valueOf(2800.00)).build();
 
-        Category categoryA = new Category(1L,
-            "A",
-            null,
-            null,
-            null);
-
-        Category categoryB = new Category(2L,
-            "B",
-            null,
-            null,
-            null);
+        Category categoryA = Category.builder().id(1L).categoryName("A").build();
+        Category categoryB = Category.builder().id(2L).categoryName("B").build();
 
         correctInstructor = Instructor.builder()
             .id(1L)
@@ -71,33 +60,28 @@ class RideValidatorTest {
             .licenceExpireDate(LocalDate.now().plusYears(1L))
             .build();
 
-        correctCar = new Car(1L,
-            "Ford",
-            "Focus",
-            "WW 12345",
-            2020,
-            LocalDate.of(2030, 12, 31),
-            LocalDate.of(2030, 12, 31),
-            new ArrayList<>(),
-            new ArrayList<>()
-        );
+        correctCar = Car.builder()
+            .mark("Ford")
+            .model("Focus")
+            .plate("WW 12345")
+            .productionYear(2020)
+            .endOfReview(LocalDate.of(2030, 12, 31))
+            .endOfInsurance(LocalDate.of(2030, 12, 31))
+            .instructors(new ArrayList<>())
+            .rides(new ArrayList<>())
+            .build();
 
-        RideDetails firstRideDetails = new RideDetails();
-        RideDetails secondRideDetails = new RideDetails();
-        firstRideDetails.setId(1L);
-        firstRideDetails.setRideType(RideType.Normal);
-        firstRideDetails.setDuration(BigDecimal.valueOf(1));
-        secondRideDetails.setId(2L);
-        secondRideDetails.setRideType(RideType.Additional);
-        secondRideDetails.setDuration(BigDecimal.valueOf(1.5));
+        RideDetails firstRideDetails = RideDetails.builder().id(1L).rideType(RideType.Normal).duration(BigDecimal.valueOf(1)).build();
+        RideDetails secondRideDetails = RideDetails.builder().id(2L).rideType(RideType.Additional).duration(BigDecimal.valueOf(1.5)).build();
 
-        correctRide = new Ride(1L,
-            LocalDate.of(2021, 01, 31),
-            Arrays.asList(firstCourseClient, secondCourseClient),
-            correctInstructor,
-            correctCar,
-            Arrays.asList(firstRideDetails, secondRideDetails)
-        );
+        correctRide = Ride.builder()
+            .id(1L)
+            .date(LocalDate.of(2021, 01, 31))
+            .courseClients(Arrays.asList(firstCourseClient, secondCourseClient))
+            .instructor(correctInstructor)
+            .car(correctCar)
+            .rideDetails(Arrays.asList(firstRideDetails, secondRideDetails))
+            .build();
     }
 
     @Test
@@ -116,7 +100,7 @@ class RideValidatorTest {
     @MethodSource("setOfDatesAndValidationResults")
     void shouldValidateDate(LocalDate date, List<String> expected) {
         Ride rideWithVariableDate = correctRide.toBuilder().date(date).build();
-        System.out.println(rideWithVariableDate.getDate());
+
         List<String> resultOfValidation = RideValidator.validate(rideWithVariableDate);
 
         assertEquals(expected, resultOfValidation);

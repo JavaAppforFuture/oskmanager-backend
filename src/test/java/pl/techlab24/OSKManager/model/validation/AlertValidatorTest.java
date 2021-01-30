@@ -22,12 +22,14 @@ class AlertValidatorTest {
 
     @BeforeEach
     void setup() {
-        correctAlert = new Alert(1L,
-            "Test alert",
-            LocalDate.of(2021, 01, 23),
-            null,
-            AlertType.Review,
-            AlertPriority.Normal);
+        correctAlert = Alert.builder()
+            .id(1L)
+            .title("Test alert")
+            .date(LocalDate.of(2021, 1, 23))
+            .description(null)
+            .alertType(AlertType.Review)
+            .alertPriority(AlertPriority.Normal)
+            .build();
     }
 
     @Test
@@ -45,8 +47,7 @@ class AlertValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfTitlesAndValidationResults")
     void shouldValidateTitle(String title, List<String> expected) {
-        Alert alertWithVariableTitle = correctAlert;
-        alertWithVariableTitle.setTitle(title);
+        Alert alertWithVariableTitle = correctAlert.toBuilder().title(title).build();
 
         List<String> resultOfValidation = AlertValidator.validate(alertWithVariableTitle);
 
@@ -66,8 +67,7 @@ class AlertValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfDatesAndValidationResults")
     void shouldValidateDate(LocalDate date, List<String> expected) {
-        Alert alertWithVariableDate = correctAlert;
-        alertWithVariableDate.setDate(date);
+        Alert alertWithVariableDate = correctAlert.toBuilder().date(date).build();
 
         List<String> resultOfValidation = AlertValidator.validate(alertWithVariableDate);
 
@@ -85,8 +85,7 @@ class AlertValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfAlertTypesAndValidationResults")
     void shouldValidateAlertType(AlertType alertType, List<String> expected) {
-        Alert alertWithVariableAlertType = correctAlert;
-        alertWithVariableAlertType.setAlertType(alertType);
+        Alert alertWithVariableAlertType = correctAlert.toBuilder().alertType(alertType).build();
 
         List<String> resultOfValidation = AlertValidator.validate(alertWithVariableAlertType);
 
@@ -104,8 +103,7 @@ class AlertValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfAlertPrioritiesAndValidationResults")
     void shouldValidateAlertPriority(AlertPriority alertPriority, List<String> expected) {
-        Alert alertWithVariableAlertPriority = correctAlert;
-        alertWithVariableAlertPriority.setAlertPriority(alertPriority);
+        Alert alertWithVariableAlertPriority = correctAlert.toBuilder().alertPriority(alertPriority).build();
 
         List<String> resultOfValidation = AlertValidator.validate(alertWithVariableAlertPriority);
 

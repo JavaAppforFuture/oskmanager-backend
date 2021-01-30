@@ -22,11 +22,13 @@ class CategoryValidatorTest {
 
     @BeforeEach
     void setup() {
-        correctCategory = new Category(1L,
-            "Test category",
-            new Course(),
-            new DriverCandidateProfile(),
-            new Instructor());
+        correctCategory = Category.builder()
+            .id(1L)
+            .categoryName("Test category")
+            .course(new Course())
+            .driverCandidateProfile(new DriverCandidateProfile())
+            .instructor(new Instructor())
+            .build();
     }
 
     @Test
@@ -44,8 +46,7 @@ class CategoryValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfCategoryNamesAndValidationResults")
     void shouldValidateTitle(String categoryName, List<String> expected) {
-        Category categoryWithVariableName = correctCategory;
-        categoryWithVariableName.setCategoryName(categoryName);
+        Category categoryWithVariableName = correctCategory.toBuilder().categoryName(categoryName).build();
 
         List<String> resultOfValidation = CategoryValidator.validate(categoryWithVariableName);
 

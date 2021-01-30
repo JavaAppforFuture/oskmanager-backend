@@ -3,6 +3,7 @@ package pl.techlab24.OSKManager.model.validation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
@@ -15,6 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import pl.techlab24.OSKManager.model.Client;
 import pl.techlab24.OSKManager.model.Course;
 import pl.techlab24.OSKManager.model.CourseClient;
+import pl.techlab24.OSKManager.model.Ride;
 
 class CourseClientValidatorTest {
 
@@ -22,8 +24,13 @@ class CourseClientValidatorTest {
 
     @BeforeEach
     void setup() {
-        correctCourseClient = new CourseClient(new Course(), new Client());
-        correctCourseClient.setCustomPrice(BigDecimal.valueOf(1_000L));
+        correctCourseClient = CourseClient.builder()
+            .client(new Client())
+            .course(new Course())
+            .ride(new Ride())
+            .transactions(new ArrayList<>())
+            .customPrice(BigDecimal.valueOf(1_000L))
+            .build();
     }
 
     @Test
@@ -41,8 +48,7 @@ class CourseClientValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfCustomPricesAndValidationResults")
     void shouldValidateCustomPrice(BigDecimal customPrice, List<String> expected) {
-        CourseClient courseWithVariableCustomPrice = correctCourseClient;
-        correctCourseClient.setCustomPrice(customPrice);
+        CourseClient courseWithVariableCustomPrice = correctCourseClient.toBuilder().customPrice(customPrice).build();
 
         List<String> resultOfValidation = CourseClientValidator.validate(courseWithVariableCustomPrice);
 

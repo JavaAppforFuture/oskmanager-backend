@@ -31,17 +31,21 @@ class InstructorValidatorTest {
 
     @BeforeEach
     void setup() {
-        Category categoryA = new Category(1L,
-            "A",
-            new Course(),
-            new DriverCandidateProfile(),
-            new Instructor());
+        Category categoryA = Category.builder()
+            .id(1L)
+            .categoryName("A")
+            .course(new Course())
+            .driverCandidateProfile(new DriverCandidateProfile())
+            .instructor(new Instructor())
+            .build();
 
-        Category categoryB = new Category(2L,
-            "B",
-            new Course(),
-            new DriverCandidateProfile(),
-            new Instructor());
+        Category categoryB = Category.builder()
+            .id(2L)
+            .categoryName("B")
+            .course(new Course())
+            .driverCandidateProfile(new DriverCandidateProfile())
+            .instructor(new Instructor())
+            .build();
 
         correctInstructor = Instructor.builder()
             .id(1L)
