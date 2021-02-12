@@ -32,13 +32,19 @@ class RideDetailsValidatorTest {
 
     @Test
     void shouldValidateCorrectRideDetails() {
+        // when
         List<String> resultOfValidation = RideDetailsValidator.validate(correctRideDetails);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullRideDetails() {
+        // when
         List<String> resultOfValidation = RideDetailsValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Ride details cannot be null."), resultOfValidation);
     }
 
@@ -57,10 +63,13 @@ class RideDetailsValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfRideDurationsAndValidationResults")
     void shouldValidateRideDuration(BigDecimal rideDuration, List<String> expected) {
+        // given
         RideDetails rideDetailsWithVariableRideDuration = correctRideDetails.toBuilder().duration(rideDuration).build();
 
+        // when
         List<String> resultOfValidation = RideDetailsValidator.validate(rideDetailsWithVariableRideDuration);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

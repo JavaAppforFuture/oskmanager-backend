@@ -34,13 +34,19 @@ class OfficeValidatorTest {
 
     @Test
     void shouldValidateCorrectOffice() {
+        // when
         List<String> resultOfValidation = OfficeValidator.validate(correctOffice);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullOffice() {
+        // when
         List<String> resultOfValidation = OfficeValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Office cannot be null."), resultOfValidation);
     }
 

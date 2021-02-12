@@ -46,23 +46,32 @@ class CourseValidatorTest {
 
     @Test
     void shouldValidateCorrectCourse() {
+        // when
         List<String> resultOfValidation = CourseValidator.validate(correctCourse);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullCourse() {
+        // when
         List<String> resultOfValidation = CourseValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Course cannot be null."), resultOfValidation);
     }
 
     @ParameterizedTest
     @MethodSource("setOfCourseNumbersAndValidationResults")
     void shouldValidateCourseNumber(String courseNumber, List<String> expected) {
+        // given
         Course courseWithVariableCourseNumber = correctCourse.toBuilder().courseNumber(courseNumber).build();
 
+        // when
         List<String> resultOfValidation = CourseValidator.validate(courseWithVariableCourseNumber);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -80,10 +89,13 @@ class CourseValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfStartDatesAndValidationResults")
     void shouldValidateStartDate(LocalDate startDate, List<String> expected) {
+        // given
         Course courseWithVariableStartDate = correctCourse.toBuilder().startDate(startDate).build();
 
+        // when
         List<String> resultOfValidation = CourseValidator.validate(courseWithVariableStartDate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -100,44 +112,30 @@ class CourseValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfCategoriesAndValidationResults")
     void shouldValidateCategory(Category category, List<String> expected) {
+        // given
         Course courseWithVariableCategory = correctCourse.toBuilder().category(category).build();
 
+        // when
         List<String> resultOfValidation = CourseValidator.validate(courseWithVariableCategory);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
     private static Stream<Arguments> setOfCategoriesAndValidationResults() {
-        Category correctCategory = Category.builder()
-            .id(1L)
-            .categoryName("Test category")
-            .build();
-
-        Category incorrectCategoryWithNullCategoryName = Category.builder()
-            .id(1L)
-            .categoryName(null)
-            .build();
-
-        Category incorrectCategoryWithEmptyCategoryName = Category.builder()
-            .id(1L)
-            .categoryName("")
-            .build();
-
-        return Stream.of(
-            Arguments.of(null, Collections.singletonList("Category cannot be null.")),
-            Arguments.of(correctCategory, Collections.emptyList()),
-            Arguments.of(incorrectCategoryWithNullCategoryName, Collections.singletonList("Category name cannot be null.")),
-            Arguments.of(incorrectCategoryWithEmptyCategoryName, Collections.singletonList("Category name must contain at least 1 character."))
-        );
+        return SetsOfVariablesAndValidationResults.setOfCategoriesAndValidationResults();
     }
 
     @ParameterizedTest
     @MethodSource("setOfDefaultPricesAndValidationResults")
     void shouldValidateDefaultPrice(BigDecimal defaultPrice, List<String> expected) {
+        // given
         Course courseWithVariableDefaultPrice = correctCourse.toBuilder().defaultPrice(defaultPrice).build();
 
+        // when
         List<String> resultOfValidation = CourseValidator.validate(courseWithVariableDefaultPrice);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

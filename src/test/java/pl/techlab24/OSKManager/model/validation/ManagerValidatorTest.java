@@ -34,13 +34,19 @@ class ManagerValidatorTest {
 
     @Test
     void shouldValidateCorrectManager() {
+        // when
         List<String> resultOfValidation = ManagerValidator.validate(correctManager);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullManager() {
+        // when
         List<String> resultOfValidation = ManagerValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Manager cannot be null."), resultOfValidation);
     }
 

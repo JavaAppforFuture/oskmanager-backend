@@ -34,23 +34,32 @@ class AlertValidatorTest {
 
     @Test
     void shouldValidateCorrectAlert() {
+        // when
         List<String> resultOfValidation = AlertValidator.validate(correctAlert);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullAlert() {
+        // when
         List<String> resultOfValidation = AlertValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Alert cannot be null."), resultOfValidation);
     }
 
     @ParameterizedTest
     @MethodSource("setOfTitlesAndValidationResults")
     void shouldValidateTitle(String title, List<String> expected) {
+        // given
         Alert alertWithVariableTitle = correctAlert.toBuilder().title(title).build();
 
+        // when
         List<String> resultOfValidation = AlertValidator.validate(alertWithVariableTitle);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -67,10 +76,13 @@ class AlertValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfDatesAndValidationResults")
     void shouldValidateDate(LocalDate date, List<String> expected) {
+        // given
         Alert alertWithVariableDate = correctAlert.toBuilder().date(date).build();
 
+        // when
         List<String> resultOfValidation = AlertValidator.validate(alertWithVariableDate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -85,10 +97,13 @@ class AlertValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfAlertTypesAndValidationResults")
     void shouldValidateAlertType(AlertType alertType, List<String> expected) {
+        // given
         Alert alertWithVariableAlertType = correctAlert.toBuilder().alertType(alertType).build();
 
+        // when
         List<String> resultOfValidation = AlertValidator.validate(alertWithVariableAlertType);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -103,10 +118,13 @@ class AlertValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfAlertPrioritiesAndValidationResults")
     void shouldValidateAlertPriority(AlertPriority alertPriority, List<String> expected) {
+        // given
         Alert alertWithVariableAlertPriority = correctAlert.toBuilder().alertPriority(alertPriority).build();
 
+        // when
         List<String> resultOfValidation = AlertValidator.validate(alertWithVariableAlertPriority);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

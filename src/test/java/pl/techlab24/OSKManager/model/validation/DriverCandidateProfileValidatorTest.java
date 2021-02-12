@@ -43,24 +43,33 @@ class DriverCandidateProfileValidatorTest {
 
     @Test
     void shouldValidateCorrectDriverCandidateProfile() {
+        // when
         List<String> resultOfValidation = DriverCandidateProfileValidator.validate(correctDriverCandidateProfile);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullDriverCandidateProfile() {
+        // when
         List<String> resultOfValidation = DriverCandidateProfileValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Driver candidate profile cannot be null."), resultOfValidation);
     }
 
     @ParameterizedTest
     @MethodSource("setOfNumbersAndValidationResults")
     void shouldValidateNumber(String number, List<String> expected) {
+        // given
         DriverCandidateProfile driverCandidateProfileWithVariableNumber =
             correctDriverCandidateProfile.toBuilder().number(number).build();
 
+        // when
         List<String> resultOfValidation = DriverCandidateProfileValidator.validate(driverCandidateProfileWithVariableNumber);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -78,46 +87,32 @@ class DriverCandidateProfileValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfCategoriesAndValidationResults")
     void shouldValidateCategory(Category category, List<String> expected) {
+        // given
         DriverCandidateProfile driverCandidateProfileWithVariableCategory =
             correctDriverCandidateProfile.toBuilder().category(category).build();
 
+        // when
         List<String> resultOfValidation = DriverCandidateProfileValidator.validate(driverCandidateProfileWithVariableCategory);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
     private static Stream<Arguments> setOfCategoriesAndValidationResults() {
-        Category correctCategory = Category.builder()
-            .id(1L)
-            .categoryName("Test category")
-            .build();
-
-        Category incorrectCategoryWithNullCategoryName = Category.builder()
-            .id(1L)
-            .categoryName(null)
-            .build();
-
-        Category incorrectCategoryWithEmptyCategoryName = Category.builder()
-            .id(1L)
-            .categoryName("")
-            .build();
-
-        return Stream.of(
-            Arguments.of(null, Collections.singletonList("Category cannot be null.")),
-            Arguments.of(correctCategory, Collections.emptyList()),
-            Arguments.of(incorrectCategoryWithNullCategoryName, Collections.singletonList("Category name cannot be null.")),
-            Arguments.of(incorrectCategoryWithEmptyCategoryName, Collections.singletonList("Category name must contain at least 1 character."))
-        );
+        return SetsOfVariablesAndValidationResults.setOfCategoriesAndValidationResults();
     }
 
     @ParameterizedTest
     @MethodSource("setOfAddedDatesAndValidationResults")
     void shouldValidateAddedDate(LocalDate addedDate, List<String> expected) {
+        // given
         DriverCandidateProfile driverCandidateProfileWithVariableAddedDate =
             correctDriverCandidateProfile.toBuilder().addedDate(addedDate).build();
 
+        // when
         List<String> resultOfValidation = DriverCandidateProfileValidator.validate(driverCandidateProfileWithVariableAddedDate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

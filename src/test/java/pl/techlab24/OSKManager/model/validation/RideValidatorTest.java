@@ -86,23 +86,32 @@ class RideValidatorTest {
 
     @Test
     void shouldValidateCorrectRide() {
+        // when
         List<String> resultOfValidation = RideValidator.validate(correctRide);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullRide() {
+        // when
         List<String> resultOfValidation = RideValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Ride cannot be null."), resultOfValidation);
     }
 
     @ParameterizedTest
     @MethodSource("setOfDatesAndValidationResults")
     void shouldValidateDate(LocalDate date, List<String> expected) {
+        // given
         Ride rideWithVariableDate = correctRide.toBuilder().date(date).build();
 
+        // when
         List<String> resultOfValidation = RideValidator.validate(rideWithVariableDate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

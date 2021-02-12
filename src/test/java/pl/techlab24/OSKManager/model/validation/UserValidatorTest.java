@@ -38,24 +38,33 @@ class UserValidatorTest {
 
     @Test
     void shouldValidateCorrectUser() {
+        // when
         List<String> resultOfValidation = UserValidator.validate(correctUser);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullUser() {
+        // when
         List<String> resultOfValidation = UserValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("User cannot be null."), resultOfValidation);
     }
 
     @ParameterizedTest
     @MethodSource("setOfEmailsAndValidationResults")
     void shouldValidateEmail(String email, List<String> expected) {
+        // given
         User userWithVariableEmail = correctUser;
         userWithVariableEmail.setEmail(email);
 
+        // when
         List<String> resultOfValidation = UserValidator.validate(userWithVariableEmail);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -81,11 +90,14 @@ class UserValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfPasswordsAndValidationResults")
     void shouldValidatePassword(String password, List<String> expected) {
+        // given
         User userWithVariablePassword = correctUser;
         userWithVariablePassword.setPassword(password);
 
+        // when
         List<String> resultOfValidation = UserValidator.validate(userWithVariablePassword);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -105,11 +117,14 @@ class UserValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfNamesAndValidationResults")
     void shouldValidateName(String name, List<String> expected) {
+        // given
         User userWithVariableName = correctUser;
         userWithVariableName.setName(name);
 
+        // when
         List<String> resultOfValidation = UserValidator.validate(userWithVariableName);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -126,11 +141,14 @@ class UserValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfSecondNamesAndValidationResults")
     void shouldValidateSecondName(String secondName, List<String> expected) {
+        // given
         User userWithVariableSecondName = correctUser;
         userWithVariableSecondName.setSecondName(secondName);
 
+        // when
         List<String> resultOfValidation = UserValidator.validate(userWithVariableSecondName);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -147,11 +165,14 @@ class UserValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfSurnamesAndValidationResults")
     void shouldValidateSurname(String surname, List<String> expected) {
+        // given
         User userWithVariableSurname = correctUser;
         userWithVariableSurname.setSurname(surname);
 
+        // when
         List<String> resultOfValidation = UserValidator.validate(userWithVariableSurname);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -181,11 +202,14 @@ class UserValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfPhoneNumbersAndValidationResults")
     void shouldValidatePhoneNumber(String phoneNumber, List<String> expected) {
+        // given
         User userWithVariablePhoneNumber = correctUser;
         userWithVariablePhoneNumber.setPhoneNumber(phoneNumber);
 
+        // when
         List<String> resultOfValidation = UserValidator.validate(userWithVariablePhoneNumber);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -205,11 +229,14 @@ class UserValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfRolesAndValidationResults")
     void shouldValidateRole(String role, List<String> expected) {
+        // given
         User userWithVariableRole = correctUser;
         userWithVariableRole.setRole(role);
 
+        // when
         List<String> resultOfValidation = UserValidator.validate(userWithVariableRole);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

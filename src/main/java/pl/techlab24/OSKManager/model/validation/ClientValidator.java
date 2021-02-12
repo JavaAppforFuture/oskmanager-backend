@@ -20,7 +20,6 @@ public class ClientValidator extends Validator {
         addResultOfValidation(result, validateUser(client));
         addResultOfValidation(result, validateStreet(client.getStreet()));
         addResultOfValidation(result, validateHouseNumber(client.getHouseNumber()));
-        addResultOfValidation(result, validateApartmentNumber(client.getApartmentNumber()));
         addResultOfValidation(result, validatePostcode(client.getPostcode()));
         addResultOfValidation(result, validateCity(client.getCity()));
         addResultOfValidation(result, validatePesel(client.getPesel()));
@@ -50,16 +49,6 @@ public class ClientValidator extends Validator {
         }
         if (houseNumber.trim().isEmpty()) {
             return "House number must contain at least 1 character.";
-        }
-        return null;
-    }
-
-    private static String validateApartmentNumber(String apartmentNumber) {
-        if (apartmentNumber == null) {
-            return "Apartment number cannot be null.";
-        }
-        if (apartmentNumber.trim().isEmpty()) {
-            return "Apartment number must contain at least 1 character.";
         }
         return null;
     }
@@ -122,7 +111,7 @@ public class ClientValidator extends Validator {
         int[] peselNumbers = new int[11];
 
         for (int i = 0; i < pesel.length(); i++) {
-            peselNumbers[i] = Integer.parseInt(String.valueOf(pesel.charAt(i)));
+            peselNumbers = pesel.chars().map(x -> x - '0').toArray();
         }
 
         int sum = peselNumbers[0]

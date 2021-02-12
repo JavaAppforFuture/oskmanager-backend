@@ -68,13 +68,19 @@ class InstructorValidatorTest {
 
     @Test
     void shouldValidateCorrectInstructor() {
+        // when
         List<String> resultOfValidation = InstructorValidator.validate(correctInstructor);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullInstructor() {
+        // when
         List<String> resultOfValidation = InstructorValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Instructor cannot be null."), resultOfValidation);
     }
 
@@ -111,11 +117,14 @@ class InstructorValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfStandardPaymentRatesAndValidationResults")
     void shouldValidateStandardPaymentRate(BigDecimal standardPaymentRate, List<String> expected) {
+        // given
         Instructor instructorWithVariableStandardPaymentRate =
             correctInstructor.toBuilder().standardPaymentRate(standardPaymentRate).build();
 
+        // when
         List<String> resultOfValidation = InstructorValidator.validate(instructorWithVariableStandardPaymentRate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -131,11 +140,14 @@ class InstructorValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfAdditionalPaymentRatesAndValidationResults")
     void shouldValidateAdditionalPaymentRate(BigDecimal additionalPaymentRate, List<String> expected) {
+        // given
         Instructor instructorWithVariableAdditionalPaymentRate =
             correctInstructor.toBuilder().additionalPaymentRate(additionalPaymentRate).build();
 
+        // when
         List<String> resultOfValidation = InstructorValidator.validate(instructorWithVariableAdditionalPaymentRate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -151,11 +163,14 @@ class InstructorValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfInstructorNumbersAndValidationResults")
     void shouldValidateInstructorNumber(String instructorNumber, List<String> expected) {
+        // given
         Instructor instructorWithVariableInstructorNumber =
             correctInstructor.toBuilder().instructorNumber(instructorNumber).build();
 
+        // when
         List<String> resultOfValidation = InstructorValidator.validate(instructorWithVariableInstructorNumber);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -173,11 +188,14 @@ class InstructorValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfLicenceExpireDatesAndValidationResults")
     void shouldValidateLicenceExpireDate(LocalDate licenceExpireDate, List<String> expected) {
+        // given
         Instructor instructorWithVariableLicenceExpireDate
             = correctInstructor.toBuilder().licenceExpireDate(licenceExpireDate).build();
 
+        // when
         List<String> resultOfValidation = InstructorValidator.validate(instructorWithVariableLicenceExpireDate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

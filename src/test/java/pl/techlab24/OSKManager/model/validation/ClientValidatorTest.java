@@ -36,7 +36,7 @@ class ClientValidatorTest {
             .role("Test Role")
             .street("Test Street")
             .houseNumber("1")
-            .apartmentNumber("10")
+            .apartmentNumber(null)
             .postcode("00-000")
             .city("Test City")
             .pesel("10.10.2000")
@@ -47,13 +47,19 @@ class ClientValidatorTest {
 
     @Test
     void shouldValidateCorrectClient() {
+        // when
         List<String> resultOfValidation = ClientValidator.validate(correctClient);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullClient() {
+        // when
         List<String> resultOfValidation = ClientValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Client cannot be null."), resultOfValidation);
     }
 
@@ -75,10 +81,13 @@ class ClientValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfStreetsAndValidationResults")
     void shouldValidateStreet(String street, List<String> expected) {
+        // given
         Client clientWithVariableStreet = correctClient.toBuilder().street(street).build();
 
+        // when
         List<String> resultOfValidation = ClientValidator.validate(clientWithVariableStreet);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -95,10 +104,13 @@ class ClientValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfHouseNumbersAndValidationResults")
     void shouldValidateHouseNumber(String houseNumber, List<String> expected) {
+        // given
         Client clientWithVariableHouseNumber = correctClient.toBuilder().houseNumber(houseNumber).build();
 
+        // when
         List<String> resultOfValidation = ClientValidator.validate(clientWithVariableHouseNumber);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -114,33 +126,15 @@ class ClientValidatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("setOfApartmentNumbersAndValidationResults")
-    void shouldValidateApartmentNumber(String apartmentNumber, List<String> expected) {
-        Client clientWithVariableApartmentNumber = correctClient.toBuilder().apartmentNumber(apartmentNumber).build();
-
-        List<String> resultOfValidation = ClientValidator.validate(clientWithVariableApartmentNumber);
-
-        assertEquals(expected, resultOfValidation);
-    }
-
-    private static Stream<Arguments> setOfApartmentNumbersAndValidationResults() {
-        return Stream.of(
-            Arguments.of(null, Collections.singletonList("Apartment number cannot be null.")),
-            Arguments.of("", Collections.singletonList("Apartment number must contain at least 1 character.")),
-            Arguments.of("   ", Collections.singletonList("Apartment number must contain at least 1 character.")),
-            Arguments.of("3", Collections.emptyList()),
-            Arguments.of("1b", Collections.emptyList()),
-            Arguments.of("3/4", Collections.emptyList())
-        );
-    }
-
-    @ParameterizedTest
     @MethodSource("setOfPostcodesAndValidationResults")
     void shouldValidatePostcode(String postcode, List<String> expected) {
+        // given
         Client clientWithVariablePostcode = correctClient.toBuilder().postcode(postcode).build();
 
+        // when
         List<String> resultOfValidation = ClientValidator.validate(clientWithVariablePostcode);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -158,10 +152,13 @@ class ClientValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfCitiesAndValidationResults")
     void shouldValidateCity(String city, List<String> expected) {
+        // given
         Client clientWithVariableCity = correctClient.toBuilder().city(city).build();
 
+        // when
         List<String> resultOfValidation = ClientValidator.validate(clientWithVariableCity);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -179,10 +176,13 @@ class ClientValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfPeselsAndValidationResults")
     void shouldValidatePesel(String pesel, List<String> expected) {
+        // given
         Client clientWithVariablePesel = correctClient.toBuilder().pesel(pesel).build();
 
+        // when
         List<String> resultOfValidation = ClientValidator.validate(clientWithVariablePesel);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -200,6 +200,8 @@ class ClientValidatorTest {
             Arguments.of("40.01.2000", Collections.singletonList("Pesel number does not match correct pesel pattern.")),
             Arguments.of("62011517224", Collections.singletonList("Pesel number is incorrect.")),
             Arguments.of("70020509530", Collections.singletonList("Pesel number is incorrect.")),
+            Arguments.of("82011617221", Collections.singletonList("Pesel number is incorrect.")),
+            Arguments.of("82011617220", Collections.emptyList()),
             Arguments.of("72011517224", Collections.emptyList()),
             Arguments.of("79070339378", Collections.emptyList()),
             Arguments.of("04231298227", Collections.emptyList()),
@@ -223,10 +225,13 @@ class ClientValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfDocumentNumbersAndValidationResults")
     void shouldValidateDocumentNumber(String documentNumber, List<String> expected) {
+        // given
         Client clientWithVariableDocumentNumber = correctClient.toBuilder().documentNumber(documentNumber).build();
 
+        // when
         List<String> resultOfValidation = ClientValidator.validate(clientWithVariableDocumentNumber);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

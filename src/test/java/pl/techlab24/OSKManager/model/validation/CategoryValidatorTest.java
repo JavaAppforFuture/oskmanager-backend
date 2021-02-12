@@ -33,23 +33,32 @@ class CategoryValidatorTest {
 
     @Test
     void shouldValidateCorrectCategory() {
+        // when
         List<String> resultOfValidation = CategoryValidator.validate(correctCategory);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullCategory() {
+        // when
         List<String> resultOfValidation = CategoryValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Category cannot be null."), resultOfValidation);
     }
 
     @ParameterizedTest
     @MethodSource("setOfCategoryNamesAndValidationResults")
     void shouldValidateTitle(String categoryName, List<String> expected) {
+        // given
         Category categoryWithVariableName = correctCategory.toBuilder().categoryName(categoryName).build();
 
+        // when
         List<String> resultOfValidation = CategoryValidator.validate(categoryWithVariableName);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

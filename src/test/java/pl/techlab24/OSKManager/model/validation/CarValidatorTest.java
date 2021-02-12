@@ -36,23 +36,32 @@ class CarValidatorTest {
 
     @Test
     void shouldValidateCorrectCar() {
+        // when
         List<String> resultOfValidation = CarValidator.validate(correctCar);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullCar() {
+        // when
         List<String> resultOfValidation = CarValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Car cannot be null."), resultOfValidation);
     }
 
     @ParameterizedTest
     @MethodSource("setOfMarksAndValidationResults")
     void shouldValidateMark(String mark, List<String> expected) {
+        // given
         Car carWithVariableName = correctCar.toBuilder().mark(mark).build();
 
+        // when
         List<String> resultOfValidation = CarValidator.validate(carWithVariableName);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -69,10 +78,13 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfModelsAndValidationResults")
     void shouldValidateModel(String model, List<String> expected) {
+        // given
         Car carWithVariableModel = correctCar.toBuilder().model(model).build();
 
+        // when
         List<String> resultOfValidation = CarValidator.validate(carWithVariableModel);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -89,10 +101,13 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfPlatesAndValidationResults")
     void shouldValidatePlate(String plate, List<String> expected) {
+        // given
         Car carWithVariablePlate = correctCar.toBuilder().plate(plate).build();
 
+        // when
         List<String> resultOfValidation = CarValidator.validate(carWithVariablePlate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -109,10 +124,13 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfProductionYearsAndValidationResults")
     void shouldValidateProductionYear(Integer productionYear, List<String> expected) {
+        // given
         Car carWithVariableProductionYear = correctCar.toBuilder().productionYear(productionYear).build();
 
+        // when
         List<String> resultOfValidation = CarValidator.validate(carWithVariableProductionYear);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -129,10 +147,13 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfEndOfReviewDatesAndValidationResults")
     void shouldValidateEndOfReviewDate(LocalDate endOfReviewDate, List<String> expected) {
+        // given
         Car carWithVariableEndOfReviewDate = correctCar.toBuilder().endOfReview(endOfReviewDate).build();
 
+        // when
         List<String> resultOfValidation = CarValidator.validate(carWithVariableEndOfReviewDate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -147,10 +168,13 @@ class CarValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfEndOfInsuranceDatesAndValidationResults")
     void shouldValidateEndOfInsuranceDate(LocalDate endOfInsuranceDate, List<String> expected) {
+        // given
         Car carWithVariableEndOfInsuranceDate = correctCar.toBuilder().endOfInsurance(endOfInsuranceDate).build();
 
+        // when
         List<String> resultOfValidation = CarValidator.validate(carWithVariableEndOfInsuranceDate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

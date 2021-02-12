@@ -35,23 +35,32 @@ class TransactionValidatorTest {
 
     @Test
     void shouldValidateCorrectTransaction() {
+        // when
         List<String> resultOfValidation = TransactionValidator.validate(correctTransaction);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullTransaction() {
+        // when
         List<String> resultOfValidation = TransactionValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Transaction cannot be null."), resultOfValidation);
     }
 
     @ParameterizedTest
     @MethodSource("setOfTransactionDatesAndValidationResults")
     void shouldValidateTransactionDate(LocalDate transactionDate, List<String> expected) {
+        // given
         Transaction transactionWithVariableDate = correctTransaction.toBuilder().date(transactionDate).build();
 
+        // when
         List<String> resultOfValidation = TransactionValidator.validate(transactionWithVariableDate);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
@@ -67,10 +76,13 @@ class TransactionValidatorTest {
     @ParameterizedTest
     @MethodSource("setOfTransactionValuesAndValidationResults")
     void shouldValidateTransactionValue(BigDecimal value, List<String> expected) {
+        // given
         Transaction transactionWithVariableValue = correctTransaction.toBuilder().value(value).build();
 
+        // when
         List<String> resultOfValidation = TransactionValidator.validate(transactionWithVariableValue);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 

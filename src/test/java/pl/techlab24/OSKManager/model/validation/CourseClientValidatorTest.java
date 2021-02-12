@@ -35,23 +35,32 @@ class CourseClientValidatorTest {
 
     @Test
     void shouldValidateCorrectCourseClient() {
+        // when
         List<String> resultOfValidation = CourseClientValidator.validate(correctCourseClient);
+
+        // then
         assertEquals(Collections.emptyList(), resultOfValidation);
     }
 
     @Test
     void shouldValidateNullCourseClient() {
+        // when
         List<String> resultOfValidation = CourseClientValidator.validate(null);
+
+        // then
         assertEquals(Collections.singletonList("Course client cannot be null."), resultOfValidation);
     }
 
     @ParameterizedTest
     @MethodSource("setOfCustomPricesAndValidationResults")
     void shouldValidateCustomPrice(BigDecimal customPrice, List<String> expected) {
+        // given
         CourseClient courseWithVariableCustomPrice = correctCourseClient.toBuilder().customPrice(customPrice).build();
 
+        // when
         List<String> resultOfValidation = CourseClientValidator.validate(courseWithVariableCustomPrice);
 
+        // then
         assertEquals(expected, resultOfValidation);
     }
 
