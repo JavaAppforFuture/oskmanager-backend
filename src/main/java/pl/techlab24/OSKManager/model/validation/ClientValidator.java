@@ -108,11 +108,7 @@ public class ClientValidator extends Validator {
 
     private static boolean checkSum(String pesel) {
         int lastDigit;
-        int[] peselNumbers = new int[11];
-
-        for (int i = 0; i < pesel.length(); i++) {
-            peselNumbers = pesel.chars().map(x -> x - '0').toArray();
-        }
+        int[] peselNumbers = pesel.chars().map(x -> x - '0').toArray();
 
         int sum = peselNumbers[0]
             + peselNumbers[1] * 3
