@@ -27,17 +27,20 @@ public class TransactionValidator extends Validator {
 
     private static String validateDate(LocalDate date) {
         if (date == null) {
-            return  "Date of transaction cannot be null.";
+            return "Date of transaction cannot be null.";
+        }
+        if (date.isAfter(LocalDate.now())) {
+            return "Date of transaction cannot be later than now.";
         }
         return null;
     }
 
     private static String validateValue(BigDecimal value) {
         if (value == null) {
-            return "Value cannot be null.";
+            return "Transaction value cannot be null.";
         }
         if (value.compareTo(BigDecimal.ZERO) < 0) {
-            return "Value cannot be lower than 0.";
+            return "Transaction value cannot be lower than 0.";
         }
         return null;
     }

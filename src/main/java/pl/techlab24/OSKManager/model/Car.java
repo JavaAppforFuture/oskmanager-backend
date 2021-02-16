@@ -15,9 +15,11 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "car")
+@SuperBuilder(toBuilder = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,8 +37,8 @@ public class Car {
     private LocalDate endOfInsurance;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Instructor> instructors;
+    private List<Instructor> instructors; // not validated
 
     @OneToMany
-    private List<Ride> ride;
+    private List<Ride> rides; // not validated
 }

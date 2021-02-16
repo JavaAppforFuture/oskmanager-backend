@@ -14,10 +14,10 @@ class RegexPatterns {
             Pattern.compile("(\\+48|48)?([1-9][1-9])?[1-9][0-9]{6}");
 
     private static final Pattern peselNumberPattern =
-            Pattern.compile("[0-9]{4}[0-3]{1}[0-9]{1}[0-9]{5}");
+        Pattern.compile("[0-9]{4}[0-3][0-9][0-9]{5}");
 
     private static final Pattern dateOfBirthPattern =
-            Pattern.compile("^([0-2][0-9]|(3)[0-1])(\\-)(((0)[0-9])|((1)[0-2]))(\\-)\\d{4}$");
+        Pattern.compile("^([0-2][0-9]|(3)[0-1])([-.])(((0)[0-9])|((1)[0-2]))([-.])\\d{4}$");
 
     static boolean emailPatternCheck(String email) {
         return emailPattern.matcher(email).matches();
@@ -26,11 +26,14 @@ class RegexPatterns {
     static boolean phonePatternCheck(String phoneNumber) {
         String inputPhoneNumber = phoneNumber.replaceAll(" ", "");
         return mobilePhonePattern.matcher(inputPhoneNumber).matches()
-                || landLinePhoneNumberPattern.matcher(inputPhoneNumber).matches();
+            || landLinePhoneNumberPattern.matcher(inputPhoneNumber).matches();
     }
 
     static boolean peselPatternCheck(String pesel) {
-        return peselNumberPattern.matcher(pesel).matches()
-                || dateOfBirthPattern.matcher(pesel).matches();
+        return peselNumberPattern.matcher(pesel).matches();
+    }
+
+    static boolean dateOfBirthPatternCheck(String dateOfBirth) {
+        return dateOfBirthPattern.matcher(dateOfBirth).matches();
     }
 }

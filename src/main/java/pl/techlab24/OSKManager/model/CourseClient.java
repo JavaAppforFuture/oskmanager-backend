@@ -11,7 +11,10 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.experimental.SuperBuilder;
+
 @Entity
+@SuperBuilder(toBuilder = true)
 @Table(name = "course_client")
 public class CourseClient {
 

@@ -13,9 +13,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Data
+@SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,8 +32,8 @@ public class Instructor extends User {
     private LocalDate licenceExpireDate;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Car> cars;
+    private List<Car> cars; // not validated
 
     @OneToMany
-    private List<Ride> ride;
+    private List<Ride> ride; // not validated
 }

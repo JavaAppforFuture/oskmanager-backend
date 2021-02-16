@@ -11,9 +11,11 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "category")
+@SuperBuilder(toBuilder = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,11 +28,11 @@ public class Category {
     private String categoryName;
 
     @OneToOne
-    private Course course;
+    private Course course; // not validated
 
     @OneToOne
-    private DriverCandidateProfile driverCandidateProfile;
+    private DriverCandidateProfile driverCandidateProfile; // not validated
 
     @ManyToOne
-    private Instructor instructor;
+    private Instructor instructor; // not validated
 }

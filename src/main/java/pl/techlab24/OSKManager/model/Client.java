@@ -10,10 +10,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import pl.techlab24.OSKManager.model.enums.DocumentType;
 
 @Entity
 @Data
+@SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +23,7 @@ public class Client extends User {
 
     private String street;
     private String houseNumber;
-    private String apartmentNumber;
+    private String apartmentNumber; // not validated
     private String postcode;
     private String city;
     private String pesel; // date of birth accepted

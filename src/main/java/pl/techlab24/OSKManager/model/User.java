@@ -11,12 +11,14 @@ import javax.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import pl.techlab24.OSKManager.model.enums.Sex;
 
 @Entity
 @Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 @Inheritance
 @Data
+@SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class User {
@@ -32,6 +34,6 @@ public abstract class User {
     private String surname;
     private Sex sex;
     private String phoneNumber;
-    private String defaultPassword;
+    private String defaultPassword; // not validated
     private String role;
 }

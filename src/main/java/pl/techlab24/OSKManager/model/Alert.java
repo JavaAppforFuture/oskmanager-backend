@@ -10,11 +10,13 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import pl.techlab24.OSKManager.model.enums.AlertPriority;
 import pl.techlab24.OSKManager.model.enums.AlertType;
 
 @Entity
 @Table(name = "alert")
+@SuperBuilder(toBuilder = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

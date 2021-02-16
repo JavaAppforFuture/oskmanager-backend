@@ -20,7 +20,6 @@ public class ClientValidator extends Validator {
         addResultOfValidation(result, validateUser(client));
         addResultOfValidation(result, validateStreet(client.getStreet()));
         addResultOfValidation(result, validateHouseNumber(client.getHouseNumber()));
-        addResultOfValidation(result, validateApartmentNumber(client.getApartmentNumber()));
         addResultOfValidation(result, validatePostcode(client.getPostcode()));
         addResultOfValidation(result, validateCity(client.getCity()));
         addResultOfValidation(result, validatePesel(client.getPesel()));
@@ -54,22 +53,12 @@ public class ClientValidator extends Validator {
         return null;
     }
 
-    private static String validateApartmentNumber(String apartmentNumber) {
-        if (apartmentNumber == null) {
-            return "Apartment number cannot be null.";
-        }
-        if (apartmentNumber.trim().isEmpty()) {
-            return "Apartment number must contain at least 1 character.";
-        }
-        return null;
-    }
-
     private static String validatePostcode(String postcode) {
         if (postcode == null) {
-            return "Postcode number cannot be null.";
+            return "Postcode cannot be null.";
         }
         if (postcode.trim().isEmpty()) {
-            return "Postcode number must contain at least 1 character.";
+            return "Postcode must contain at least 1 character.";
         }
         return null;
     }
@@ -87,6 +76,9 @@ public class ClientValidator extends Validator {
     private static String validatePesel(String pesel) {
         if (pesel == null) {
             return "Pesel number cannot be null.";
+        }
+        if (RegexPatterns.dateOfBirthPatternCheck(pesel)) {
+            return null;
         }
         if (!RegexPatterns.peselPatternCheck(pesel)) {
             return "Pesel number does not match correct pesel pattern.";
@@ -116,27 +108,23 @@ public class ClientValidator extends Validator {
 
     private static boolean checkSum(String pesel) {
         int lastDigit;
-        int[] peselNumbers =  new int[11];
+        int[] peselNumbers = pesel.chars().map(x -> x - '0').toArray();
 
-        for (int i = 0; i < pesel.length(); i++) {
-            peselNumbers[i] = Integer.parseInt(String.valueOf(pesel.charAt(i)));
-        }
+        int sum = peselNumbers[0]
+            + peselNumbers[1] * 3
+            + peselNumbers[2] * 7
+            + peselNumbers[3] * 9
+            + peselNumbers[4]
+            + peselNumbers[5] * 3
+            + peselNumbers[6] * 7
+            + peselNumbers[7] * 9
+            + peselNumbers[8]
+            + peselNumbers[9] * 3;
 
-        int sum = peselNumbers[0] +
-            peselNumbers[1] * 3 +
-            peselNumbers[2] * 7 +
-            peselNumbers[3] * 9 +
-            peselNumbers[4] +
-            peselNumbers[5] * 3 +
-            peselNumbers[6] * 7 +
-            peselNumbers[7] * 9 +
-            peselNumbers[8] +
-            peselNumbers[9] * 3;
-
-        if ((sum %=10) == 0) {
+        if ((sum %= 10) == 0) {
             lastDigit = 0;
         } else {
-            lastDigit = 10 - (sum%10);
+            lastDigit = 10 - (sum % 10);
         }
 
         return lastDigit == peselNumbers[10];
