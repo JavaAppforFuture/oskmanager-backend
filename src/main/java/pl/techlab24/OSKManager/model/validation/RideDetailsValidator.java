@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import pl.techlab24.OSKManager.model.CourseClient;
 import pl.techlab24.OSKManager.model.RideDetails;
 import pl.techlab24.OSKManager.model.enums.RideType;
 
@@ -19,6 +20,10 @@ public class RideDetailsValidator extends Validator {
 
         addResultOfValidation(result, validateRideType(rideDetails.getRideType()));
         addResultOfValidation(result, validateRideDuration(rideDetails.getDuration()));
+
+        for (CourseClient courseClient : rideDetails.getCourseClients()) {
+            addResultOfValidation(result, validateCourseClient(courseClient));
+        }
 
         return result;
     }
@@ -38,5 +43,9 @@ public class RideDetailsValidator extends Validator {
             return "Ride duration cannot be lower than 0.";
         }
         return null;
+    }
+
+    private static List<String> validateCourseClient(CourseClient courseClient) {
+        return CourseClientValidator.validate(courseClient);
     }
 }

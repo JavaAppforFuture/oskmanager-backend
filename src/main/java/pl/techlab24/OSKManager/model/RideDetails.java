@@ -1,6 +1,7 @@
 package pl.techlab24.OSKManager.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,4 +32,7 @@ public class RideDetails {
 
     @ManyToOne
     private Ride ride; // not validated
+
+    @ManyToOne
+    private List<CourseClient> courseClients;
 }

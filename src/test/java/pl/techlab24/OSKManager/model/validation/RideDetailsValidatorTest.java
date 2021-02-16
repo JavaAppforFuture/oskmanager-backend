@@ -1,8 +1,12 @@
 package pl.techlab24.OSKManager.model.validation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
@@ -11,9 +15,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import pl.techlab24.OSKManager.model.Ride;
-import pl.techlab24.OSKManager.model.RideDetails;
+import org.junit.jupiter.params.provider.MethodSource;;
+import org.mockito.MockedStatic;
+import pl.techlab24.OSKManager.model.*;
 import pl.techlab24.OSKManager.model.enums.RideType;
 
 class RideDetailsValidatorTest {
@@ -22,11 +26,14 @@ class RideDetailsValidatorTest {
 
     @BeforeEach
     void setup() {
+        CourseClient firstCourseClient = CourseClient.builder().customPrice(BigDecimal.valueOf(2500.00)).build();
+
         correctRideDetails = RideDetails.builder()
             .id(1L)
             .rideType(RideType.Normal)
             .duration(BigDecimal.valueOf(1L))
             .ride(new Ride())
+            .courseClients(Arrays.asList(firstCourseClient))
             .build();
     }
 
@@ -58,6 +65,21 @@ class RideDetailsValidatorTest {
 
         // then
         assertEquals(Collections.singletonList("Ride type cannot be null."), resultOfValidation);
+    }
+
+    @Test
+    void shouldValidateCourseClientMethodCallValidateMethodFromCourseClientValidatorClass() {
+        try (MockedStatic<CourseClientValidator> mockedStatic = mockStatic(CourseClientValidator.class)) {
+            // given
+            mockedStatic.when(() -> CourseClientValidator.validate(any())).thenReturn(Collections.emptyList());
+
+            // when
+            List<String> result = RideDetailsValidator.validate(correctRideDetails);
+
+            // then
+            assertEquals(Collections.emptyList(), result);
+            mockedStatic.verify(times(correctRideDetails.getCourseClients().size()), () -> CourseClientValidator.validate(any()));
+        }
     }
 
     @ParameterizedTest
