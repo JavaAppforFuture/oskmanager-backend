@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.hibernate.validator.internal.constraintvalidators.hv.pl.PESELValidator;
 import pl.techlab24.OSKManager.model.Client;
 import pl.techlab24.OSKManager.model.User;
 import pl.techlab24.OSKManager.model.enums.DocumentType;
@@ -83,7 +84,7 @@ public class ClientValidator extends Validator {
         if (!RegexPatterns.peselPatternCheck(pesel)) {
             return "Pesel number does not match correct pesel pattern.";
         }
-        if (!checkSum(pesel)) {
+        if (!isValid(pesel)) {
             return "Pesel number is incorrect.";
         }
         return null;
@@ -106,27 +107,10 @@ public class ClientValidator extends Validator {
         return null;
     }
 
-    private static boolean checkSum(String pesel) {
-        int lastDigit;
-        int[] peselNumbers = pesel.chars().map(x -> x - '0').toArray();
+    private static boolean isValid(String pesel) {
+        PESELValidator validator = new PESELValidator();
+        validator.initialize(null);
 
-        int sum = peselNumbers[0]
-            + peselNumbers[1] * 3
-            + peselNumbers[2] * 7
-            + peselNumbers[3] * 9
-            + peselNumbers[4]
-            + peselNumbers[5] * 3
-            + peselNumbers[6] * 7
-            + peselNumbers[7] * 9
-            + peselNumbers[8]
-            + peselNumbers[9] * 3;
-
-        if ((sum %= 10) == 0) {
-            lastDigit = 0;
-        } else {
-            lastDigit = 10 - (sum % 10);
-        }
-
-        return lastDigit == peselNumbers[10];
+        return validator.isValid(pesel, null);
     }
 }
