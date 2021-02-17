@@ -1,12 +1,10 @@
 package pl.techlab24.OSKManager.model.validation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.times;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
@@ -23,17 +21,24 @@ import pl.techlab24.OSKManager.model.enums.RideType;
 class RideDetailsValidatorTest {
 
     private RideDetails correctRideDetails;
+    private CourseClient correctCourseClient;
 
     @BeforeEach
     void setup() {
-        CourseClient firstCourseClient = CourseClient.builder().customPrice(BigDecimal.valueOf(2500.00)).build();
+        correctCourseClient = CourseClient.builder()
+            .client(new Client())
+            .course(new Course())
+            .ride(new Ride())
+            .transactions(new ArrayList<>())
+            .customPrice(BigDecimal.valueOf(1_000L))
+            .build();
 
         correctRideDetails = RideDetails.builder()
             .id(1L)
             .rideType(RideType.Normal)
             .duration(BigDecimal.valueOf(1L))
             .ride(new Ride())
-            .courseClients(Arrays.asList(firstCourseClient))
+            .courseClients(correctCourseClient)
             .build();
     }
 
@@ -71,14 +76,14 @@ class RideDetailsValidatorTest {
     void shouldValidateCourseClientMethodCallValidateMethodFromCourseClientValidatorClass() {
         try (MockedStatic<CourseClientValidator> mockedStatic = mockStatic(CourseClientValidator.class)) {
             // given
-            mockedStatic.when(() -> CourseClientValidator.validate(any())).thenReturn(Collections.emptyList());
+            mockedStatic.when(() -> CourseClientValidator.validate(correctCourseClient)).thenReturn(Collections.emptyList());
 
             // when
             List<String> result = RideDetailsValidator.validate(correctRideDetails);
 
             // then
             assertEquals(Collections.emptyList(), result);
-            mockedStatic.verify(times(correctRideDetails.getCourseClients().size()), () -> CourseClientValidator.validate(any()));
+            mockedStatic.verify(() -> CourseClientValidator.validate(correctCourseClient));
         }
     }
 

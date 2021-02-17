@@ -34,5 +34,5 @@ public class RideDetails {
     private Ride ride; // not validated
 
     @ManyToOne
-    private List<CourseClient> courseClients;
+    private CourseClient courseClient;
 }

@@ -20,10 +20,7 @@ public class RideDetailsValidator extends Validator {
 
         addResultOfValidation(result, validateRideType(rideDetails.getRideType()));
         addResultOfValidation(result, validateRideDuration(rideDetails.getDuration()));
-
-        for (CourseClient courseClient : rideDetails.getCourseClients()) {
-            addResultOfValidation(result, validateCourseClient(courseClient));
-        }
+        addResultOfValidation(result, validateCourseClient(rideDetails.getCourseClient()));
 
         return result;
     }
