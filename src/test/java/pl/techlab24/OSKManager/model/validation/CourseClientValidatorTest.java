@@ -29,6 +29,7 @@ class CourseClientValidatorTest {
             .course(new Course())
             .ride(new Ride())
             .transactions(new ArrayList<>())
+            .rideDetails(new ArrayList<>())
             .customPrice(BigDecimal.valueOf(1_000L))
             .build();
     }

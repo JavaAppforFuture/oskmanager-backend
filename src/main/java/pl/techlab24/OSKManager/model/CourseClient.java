@@ -35,6 +35,9 @@ public class CourseClient {
     @OneToMany
     private List<Transaction> transactions;
 
+    @OneToMany
+    private List<RideDetails> rideDetails;
+
     private BigDecimal customPrice; // only this variable must be validated
 
     public CourseClient() {

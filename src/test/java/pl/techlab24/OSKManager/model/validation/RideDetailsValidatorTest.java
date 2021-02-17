@@ -30,6 +30,7 @@ class RideDetailsValidatorTest {
             .course(new Course())
             .ride(new Ride())
             .transactions(new ArrayList<>())
+            .rideDetails(new ArrayList<>())
             .customPrice(BigDecimal.valueOf(1_000L))
             .build();
 
@@ -38,7 +39,7 @@ class RideDetailsValidatorTest {
             .rideType(RideType.Normal)
             .duration(BigDecimal.valueOf(1L))
             .ride(new Ride())
-            .courseClients(correctCourseClient)
+            .courseClient(correctCourseClient)
             .build();
     }
 
