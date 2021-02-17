@@ -77,7 +77,6 @@ class RideValidatorTest {
         correctRide = Ride.builder()
             .id(1L)
             .date(LocalDate.of(2021, 01, 31))
-            .courseClients(Arrays.asList(firstCourseClient, secondCourseClient))
             .instructor(correctInstructor)
             .car(correctCar)
             .rideDetails(Arrays.asList(firstRideDetails, secondRideDetails))
@@ -122,21 +121,6 @@ class RideValidatorTest {
             Arguments.of(LocalDate.of(2025, 12, 15), Collections.emptyList()),
             Arguments.of(LocalDate.now(), Collections.emptyList())
         );
-    }
-
-    @Test
-    void shouldValidateCourseClientMethodCallValidateMethodFromCourseClientValidatorClass() {
-        try (MockedStatic<CourseClientValidator> mockedStatic = mockStatic(CourseClientValidator.class)) {
-            // given
-            mockedStatic.when(() -> CourseClientValidator.validate(any())).thenReturn(Collections.emptyList());
-
-            // when
-            List<String> result = RideValidator.validate(correctRide);
-
-            // then
-            assertEquals(Collections.emptyList(), result);
-            mockedStatic.verify(times(correctRide.getCourseClients().size()), () -> CourseClientValidator.validate(any()));
-        }
     }
 
     @Test

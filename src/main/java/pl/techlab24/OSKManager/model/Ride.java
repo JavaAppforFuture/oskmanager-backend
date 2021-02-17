@@ -29,9 +29,6 @@ public class Ride {
 
     private LocalDate date;
 
-    @OneToMany
-    private List<CourseClient> courseClients;
-
     @ManyToOne
     private Instructor instructor;
 
