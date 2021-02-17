@@ -1,15 +1,11 @@
 package pl.techlab24.OSKManager.model.validation;
 
+import pl.techlab24.OSKManager.model.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import pl.techlab24.OSKManager.model.Car;
-import pl.techlab24.OSKManager.model.CourseClient;
-import pl.techlab24.OSKManager.model.Instructor;
-import pl.techlab24.OSKManager.model.Ride;
-import pl.techlab24.OSKManager.model.RideDetails;
 
 public class RideValidator extends Validator {
 
@@ -21,11 +17,6 @@ public class RideValidator extends Validator {
         List<String> result = new ArrayList<>();
 
         addResultOfValidation(result, validateDate(ride.getDate()));
-
-        for (CourseClient courseClient : ride.getCourseClients()) {
-            addResultOfValidation(result, validateCourseClient(courseClient));
-        }
-
         addResultOfValidation(result, validateInstructor(ride.getInstructor()));
         addResultOfValidation(result, validateCar(ride.getCar()));
 

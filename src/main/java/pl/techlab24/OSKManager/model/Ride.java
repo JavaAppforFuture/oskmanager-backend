@@ -1,19 +1,13 @@
 package pl.techlab24.OSKManager.model;
 
-import java.time.LocalDate;
-import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "ride")
@@ -28,9 +22,6 @@ public class Ride {
     private Long id;
 
     private LocalDate date;
-
-    @OneToMany
-    private List<CourseClient> courseClients;
 
     @ManyToOne
     private Instructor instructor;
