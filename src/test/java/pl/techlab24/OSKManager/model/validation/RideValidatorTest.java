@@ -24,6 +24,8 @@ import pl.techlab24.OSKManager.model.Category;
 import pl.techlab24.OSKManager.model.CourseClient;
 import pl.techlab24.OSKManager.model.Instructor;
 import pl.techlab24.OSKManager.model.Ride;
+import pl.techlab24.OSKManager.model.RideDetails;
+import pl.techlab24.OSKManager.model.enums.RideType;
 import pl.techlab24.OSKManager.model.enums.Sex;
 
 class RideValidatorTest {
@@ -69,12 +71,15 @@ class RideValidatorTest {
             .rides(new ArrayList<>())
             .build();
 
+        RideDetails firstRideDetails = RideDetails.builder().id(1L).rideType(RideType.Normal).duration(BigDecimal.valueOf(1)).courseClient(firstCourseClient).build();
+        RideDetails secondRideDetails = RideDetails.builder().id(2L).rideType(RideType.Additional).duration(BigDecimal.valueOf(1.5)).courseClient(secondCourseClient).build();
+
         correctRide = Ride.builder()
             .id(1L)
             .date(LocalDate.of(2021, 01, 31))
             .instructor(correctInstructor)
             .car(correctCar)
-            .rideDetails(new ArrayList<>())
+            .rideDetails(Arrays.asList(firstRideDetails, secondRideDetails))
             .build();
     }
 
