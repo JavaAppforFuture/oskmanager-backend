@@ -24,8 +24,8 @@ import pl.techlab24.OSKManager.model.enums.RideType;
 
 class RideDetailsValidatorTest {
 
-    private RideDetails correctRideDetails;
     private CourseClient correctCourseClient;
+    private RideDetails correctRideDetails;
 
     @BeforeEach
     void setup() {
