@@ -31,4 +31,7 @@ public class RideDetails {
 
     @ManyToOne
     private Ride ride; // not validated
+
+    @ManyToOne
+    private CourseClient courseClient;
 }

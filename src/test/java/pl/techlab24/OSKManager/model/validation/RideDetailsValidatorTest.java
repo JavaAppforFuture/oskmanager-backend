@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import pl.techlab24.OSKManager.model.CourseClient;
 import pl.techlab24.OSKManager.model.Ride;
 import pl.techlab24.OSKManager.model.RideDetails;
 import pl.techlab24.OSKManager.model.enums.RideType;
@@ -27,6 +28,7 @@ class RideDetailsValidatorTest {
             .rideType(RideType.Normal)
             .duration(BigDecimal.valueOf(1L))
             .ride(new Ride())
+            .courseClient(new CourseClient())
             .build();
     }
 
