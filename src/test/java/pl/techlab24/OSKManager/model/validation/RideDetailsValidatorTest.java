@@ -77,20 +77,6 @@ class RideDetailsValidatorTest {
         assertEquals(Collections.singletonList("Ride type cannot be null."), resultOfValidation);
     }
 
-    @Test
-    void shouldValidateCourseClientMethodCallValidateMethodFromCourseClientValidatorClass() {
-        try (MockedStatic<CourseClientValidator> mockedStatic = mockStatic(CourseClientValidator.class)) {
-            // given
-            mockedStatic.when(() -> CourseClientValidator.validate(correctCourseClient)).thenReturn(Collections.emptyList());
-
-            // when
-            List<String> result = RideDetailsValidator.validate(correctRideDetails);
-
-            // then
-            assertEquals(Collections.emptyList(), result);
-            mockedStatic.verify(() -> CourseClientValidator.validate(correctCourseClient));
-        }
-    }
 
     @ParameterizedTest
     @MethodSource("setOfRideDurationsAndValidationResults")
@@ -112,5 +98,20 @@ class RideDetailsValidatorTest {
             Arguments.of(BigDecimal.valueOf(100L), Collections.emptyList()),
             Arguments.of(BigDecimal.valueOf(-1L), Collections.singletonList("Ride duration cannot be lower than 0."))
         );
+    }
+
+    @Test
+    void shouldValidateCourseClientMethodCallValidateMethodFromCourseClientValidatorClass() {
+        try (MockedStatic<CourseClientValidator> mockedStatic = mockStatic(CourseClientValidator.class)) {
+            // given
+            mockedStatic.when(() -> CourseClientValidator.validate(correctCourseClient)).thenReturn(Collections.emptyList());
+
+            // when
+            List<String> result = RideDetailsValidator.validate(correctRideDetails);
+
+            // then
+            assertEquals(Collections.emptyList(), result);
+            mockedStatic.verify(() -> CourseClientValidator.validate(correctCourseClient));
+        }
     }
 }
