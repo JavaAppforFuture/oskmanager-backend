@@ -20,7 +20,6 @@ public class RideValidator extends Validator {
         List<String> result = new ArrayList<>();
 
         addResultOfValidation(result, validateDate(ride.getDate()));
-
         addResultOfValidation(result, validateInstructor(ride.getInstructor()));
         addResultOfValidation(result, validateCar(ride.getCar()));
 
