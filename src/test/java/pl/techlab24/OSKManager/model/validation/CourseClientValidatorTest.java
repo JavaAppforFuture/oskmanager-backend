@@ -16,7 +16,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import pl.techlab24.OSKManager.model.Client;
 import pl.techlab24.OSKManager.model.Course;
 import pl.techlab24.OSKManager.model.CourseClient;
-import pl.techlab24.OSKManager.model.Ride;
 
 class CourseClientValidatorTest {
 
@@ -27,7 +26,6 @@ class CourseClientValidatorTest {
         correctCourseClient = CourseClient.builder()
             .client(new Client())
             .course(new Course())
-            .ride(new Ride())
             .transactions(new ArrayList<>())
             .customPrice(BigDecimal.valueOf(1_000L))
             .build();

@@ -29,9 +29,6 @@ public class CourseClient {
     @MapsId("courseId")
     private Course course;
 
-    @ManyToOne
-    private Ride ride;
-
     @OneToMany
     private List<Transaction> transactions;
 
