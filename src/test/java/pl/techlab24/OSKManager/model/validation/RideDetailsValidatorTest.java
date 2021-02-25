@@ -32,7 +32,7 @@ class RideDetailsValidatorTest {
         correctCourseClient = CourseClient.builder()
             .client(new Client())
             .course(new Course())
-            .ride(new Ride())
+            .rideDetails(new ArrayList<>())
             .transactions(new ArrayList<>())
             .customPrice(BigDecimal.valueOf(2_800L))
             .build();

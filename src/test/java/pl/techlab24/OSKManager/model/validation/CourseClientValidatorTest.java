@@ -27,7 +27,7 @@ class CourseClientValidatorTest {
         correctCourseClient = CourseClient.builder()
             .client(new Client())
             .course(new Course())
-            .ride(new Ride())
+            .rideDetails(new ArrayList<>())
             .transactions(new ArrayList<>())
             .customPrice(BigDecimal.valueOf(1_000L))
             .build();
