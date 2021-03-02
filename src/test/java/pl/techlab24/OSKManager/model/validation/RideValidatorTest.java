@@ -71,8 +71,8 @@ class RideValidatorTest {
             .rides(new ArrayList<>())
             .build();
 
-        RideDetails firstRideDetails = RideDetails.builder().id(1L).rideType(RideType.Normal).duration(BigDecimal.valueOf(1)).build();
-        RideDetails secondRideDetails = RideDetails.builder().id(2L).rideType(RideType.Additional).duration(BigDecimal.valueOf(1.5)).build();
+        RideDetails firstRideDetails = RideDetails.builder().id(1L).rideType(RideType.Normal).duration(BigDecimal.valueOf(1)).courseClient(firstCourseClient).build();
+        RideDetails secondRideDetails = RideDetails.builder().id(2L).rideType(RideType.Additional).duration(BigDecimal.valueOf(1.5)).courseClient(secondCourseClient).build();
 
         correctRide = Ride.builder()
             .id(1L)
