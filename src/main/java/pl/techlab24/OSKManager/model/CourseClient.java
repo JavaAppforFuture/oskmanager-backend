@@ -29,14 +29,11 @@ public class CourseClient {
     @MapsId("courseId")
     private Course course;
 
-    @ManyToOne
-    private Ride ride;
+    @OneToMany
+    private List<RideDetails> rideDetails;
 
     @OneToMany
     private List<Transaction> transactions;
-
-    @OneToMany
-    private List<RideDetails> rideDetails;
 
     private BigDecimal customPrice; // only this variable must be validated
 

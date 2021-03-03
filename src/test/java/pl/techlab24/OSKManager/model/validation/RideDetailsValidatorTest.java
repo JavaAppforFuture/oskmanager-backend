@@ -32,10 +32,9 @@ class RideDetailsValidatorTest {
         correctCourseClient = CourseClient.builder()
             .client(new Client())
             .course(new Course())
-            .ride(new Ride())
-            .transactions(new ArrayList<>())
             .rideDetails(new ArrayList<>())
-            .customPrice(BigDecimal.valueOf(1_000L))
+            .transactions(new ArrayList<>())
+            .customPrice(BigDecimal.valueOf(2_800L))
             .build();
 
         correctRideDetails = RideDetails.builder()
@@ -76,7 +75,6 @@ class RideDetailsValidatorTest {
         // then
         assertEquals(Collections.singletonList("Ride type cannot be null."), resultOfValidation);
     }
-
 
     @ParameterizedTest
     @MethodSource("setOfRideDurationsAndValidationResults")
