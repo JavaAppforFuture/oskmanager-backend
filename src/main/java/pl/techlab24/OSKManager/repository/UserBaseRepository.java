@@ -5,5 +5,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 import pl.techlab24.OSKManager.model.User;
 
 @NoRepositoryBean
-public interface UserBaseRepository<T extends User> extends JpaRepository<User, Long> {
+public interface UserBaseRepository<T extends User> extends JpaRepository<T, Long> {
 }
